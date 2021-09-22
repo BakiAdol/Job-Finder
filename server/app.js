@@ -9,6 +9,11 @@ dotenv.config({ path: "./config.env" });
 //database connection
 require("./db/dbconn");
 
+app.use(express.json());
+
+// link router file
+app.use(require("./router/auth"));
+
 app.get("/", (req, res) => {
   res.send("Hello from node server");
 });
