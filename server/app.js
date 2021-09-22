@@ -1,23 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 const app = express();
 
-mongoose
-  .connect("mongodb://localhost:27017/job-finder", {
-    useNewUrlParser: true,
-  })
-  .then(() => {
-    console.log("Database connected!");
-  })
-  .catch((err) => {
-    console.log("Databse connection failed!");
-  });
+dotenv.config({ path: "./config.env" });
+
+//database connection
+require("./db/dbconn");
 
 app.get("/", (req, res) => {
   res.send("Hello from node server");
 });
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
