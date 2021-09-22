@@ -12,7 +12,7 @@ require("./db/dbconn");
 app.use(express.json());
 
 // link router file
-app.use(require("./router/auth"));
+app.use(require("./router/router"));
 
 app.get("/", (req, res) => {
   res.send("Hello from node server");
