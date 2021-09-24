@@ -53,7 +53,6 @@ module.exports = {
         expires: new Date(Date.now() + 25892000000),
         httpOnly: true,
       });
-      console.log(token);
       res.status(201).json("Login in successfull!");
     } catch (error) {
       console.log(error);
