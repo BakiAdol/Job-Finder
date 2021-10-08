@@ -1,0 +1,22 @@
+div.navBody {
+  background-color: var(--c-primary);
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.NavContainer {
+  width: 96%;
+  display: flex;
+  justify-content: space-between;
+}
+
+div.NavContainer div.links .navLink,
+.joinLink {
+  text-decoration: none;
+  font-size: 1.7rem;
+  padding: 0.5rem;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+}
