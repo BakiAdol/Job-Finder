@@ -9,13 +9,14 @@ export default function Navbar() {
       <div className="NavContainer">
         <div className="navLogo">JF</div>
         <div className="links">
-          {NavLinkItems.map((item) => {
+          {NavLinkItems.map((item, pos) => {
             return (
               <NavLink
                 exact
                 activeClassName="navActive"
                 to={item.link}
                 className="navLink"
+                key={pos}
               >
                 {item.linkName}
               </NavLink>

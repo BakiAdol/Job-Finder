@@ -11,6 +11,7 @@
   --c-primary: rgb(0, 174, 255);
   --c-light-gray: rgb(230, 230, 230);
   --c-dark-gray: rgb(94, 94, 94);
+  --c-error: red;
 }
 
 body {

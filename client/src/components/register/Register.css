@@ -3,12 +3,20 @@ div.regContainer {
   width: 30%;
   padding: 1.5rem;
   margin: 5rem;
+  min-width: 300px;
 }
 
 div.regContainer h1 {
   text-align: center;
   font-size: 2rem;
   color: var(--c-primary);
+}
+
+div.regContainer p.errorShow {
+  font-size: 1.5rem;
+  color: var(--c-error);
+  font-weight: 700;
+  margin-top: 0.5rem;
 }
 
 div.regContainer form.regForm input[type="text"],

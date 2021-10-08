@@ -26,7 +26,7 @@ module.exports = {
       const newUser = new User({ uName, uEmail, uPassword: hasPass, uGender });
 
       await newUser.save();
-      res.status(201).json("User registration successful!");
+      res.status(201).json({ msg: "User registration successful!" });
     } catch (error) {
       console.log(error);
     }
@@ -41,12 +41,12 @@ module.exports = {
     try {
       const userExist = await User.findOne({ uEmail: uEmail });
       if (!userExist) {
-        return res.status(422).json({ error: "Wrong email of password!" });
+        return res.status(422).json({ error: "Wrong email or password!" });
       }
 
       const isMatch = await bcrypt.compare(uPassword, userExist.uPassword);
       if (!isMatch) {
-        return res.status(422).json({ error: "Wrong email of password!" });
+        return res.status(422).json({ error: "Wrong email or password!" });
       }
       let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
       res.cookie("jwtoken", token, {

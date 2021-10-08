@@ -1,20 +1,65 @@
-import React from "react";
-import { inputField } from "./fieldItems";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "../Register/Register.css";
+import { inputField } from "./fieldItems";
 
 export default function Login() {
+  const [errorShow, seterrorShow] = useState("");
+
+  const history = useHistory();
+  const [logData, setLogData] = useState({
+    uEmail: "",
+    uPassword: "",
+  });
+
+  const handleInput = (event) => {
+    let { name, value } = event.target;
+    setLogData({ ...logData, [name]: value });
+  };
+
+  const submitLogData = async (e) => {
+    e.preventDefault();
+    const { uEmail, uPassword } = logData;
+    const res = await fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uEmail,
+        uPassword,
+      }),
+    });
+    const data = await res.json();
+    if (res.status === 422) {
+      seterrorShow(data.error);
+    } else {
+      history.push("/");
+    }
+  };
+
   return (
     <div className="regContainer">
       <h1>Sign In</h1>
-      <form className="regForm">
-        {inputField.map((items) => {
-          return <input type={items.type} placeholder={items.placeHolder} />;
+      <p className="errorShow">{errorShow}</p>
+      <form className="regForm" method="POST" onSubmit={submitLogData}>
+        {inputField.map((items, pos) => {
+          return (
+            <input
+              name={items.value}
+              key={pos}
+              value={logData.value}
+              onChange={handleInput}
+              type={items.type}
+              placeholder={items.placeHolder}
+            />
+          );
         })}
         <button type="submit">Log In</button>
       </form>
       <div className="alreadyAccount">
         <p>Not have an account?</p>
-        <a href="/register"> Register</a>
+        <Link to="/register"> Register</Link>
       </div>
     </div>
   );
