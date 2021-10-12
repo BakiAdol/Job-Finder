@@ -5,7 +5,7 @@ const NavLinkItems = [
   },
   {
     linkName: "Job",
-    link: "#",
+    link: "/jobs",
   },
   {
     linkName: "Contact",

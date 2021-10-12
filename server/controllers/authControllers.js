@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/userSchema");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 
 require("../db/dbconn");
 
@@ -48,11 +48,12 @@ module.exports = {
       if (!isMatch) {
         return res.status(422).json({ error: "Wrong email or password!" });
       }
-      let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
-      res.cookie("jwtoken", token, {
-        expires: new Date(Date.now() + 25892000000),
-        httpOnly: true,
-      });
+
+      // let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+      // res.cookie("jwtoken", token, {
+      //   expires: new Date(Date.now() + 25892000000),
+      //   httpOnly: true,
+      // });
       res.status(201).json("Login in successfull!");
     } catch (error) {
       console.log(error);

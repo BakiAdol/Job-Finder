@@ -1,0 +1,48 @@
+div.jobCard {
+  background-color: var(--c-white);
+  font-size: 1rem;
+  width: 100%;
+  color: var(--c-dark-gray);
+  margin-bottom: 1rem;
+}
+
+div.jobCard a {
+  text-decoration: none;
+  font-weight: 700;
+  display: block;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  letter-spacing: 0.05rem;
+  color: var(--c-primary);
+}
+
+div.jobCard p.dateShow {
+  color: var(--c-mid-gray);
+  padding-left: 0.5rem;
+  padding-top: 0.2rem;
+  font-size: 0.8em;
+}
+div.jobCard h2.titleShow {
+  font-size: 1.2rem;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+}
+
+div.jobCard p.desShow {
+  padding: 0 0.5rem 0.5rem 0.5rem;
+}
+
+div.jobCard img {
+  width: 100%;
+}
+
+div.jobCard div.jobCata {
+  /* background-color: var(--c-white-gray); */
+  padding: 0.5rem;
+}
+
+div.jobCard div.jobCata p.jobCataItems {
+  display: inline-block;
+  padding: 0.2rem 0.5rem 0.3rem 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  background-color: var(--c-light-gray);
+  border-radius: 1rem;
+}
