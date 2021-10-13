@@ -12,10 +12,11 @@
   --c-mid-gray: rgb(145, 145, 145);
   --c-dark-gray: rgb(94, 94, 94);
   --c-error: red;
+  --f-lato: "Lato", sans-serif;
 }
 
 body {
   font-size: 62.5%;
-  font-family: "Lato", sans-serif;
+  font-family: var(--f-lato);
   background-color: var(--c-light-gray);
 }
