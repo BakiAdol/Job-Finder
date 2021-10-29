@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/userSchema");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 require("../db/dbconn");
 
@@ -26,6 +26,11 @@ module.exports = {
       const newUser = new User({ uName, uEmail, uPassword: hasPass, uGender });
 
       await newUser.save();
+      let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
       res.status(201).json({ msg: "User registration successful!" });
     } catch (error) {
       console.log(error);
@@ -49,14 +54,24 @@ module.exports = {
         return res.status(422).json({ error: "Wrong email or password!" });
       }
 
-      // let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
-      // res.cookie("jwtoken", token, {
-      //   expires: new Date(Date.now() + 25892000000),
-      //   httpOnly: true,
-      // });
-      res.status(201).json("Login in successfull!");
+      let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+      res.cookie("token", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
+
+      return res.status(201).json({ msg: "Login in successfull!" });
     } catch (error) {
       console.log(error);
+      return res.status(422).json({ error: "Server error!" });
     }
+  },
+  async logoutFunction(req, res) {
+    res
+      .cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(0),
+      })
+      .send();
   },
 };

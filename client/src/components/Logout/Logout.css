@@ -1,0 +1,10 @@
+.logoutBtn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.3rem;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}

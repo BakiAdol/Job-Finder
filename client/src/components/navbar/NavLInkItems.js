@@ -8,7 +8,7 @@ const NavLinkItems = [
     link: "/jobs",
   },
   {
-    linkName: "Contact",
+    linkName: "Profile",
     link: "#",
   },
 ];

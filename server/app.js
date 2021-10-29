@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -10,6 +11,7 @@ dotenv.config({ path: "./config.env" });
 require("./db/dbconn");
 
 app.use(express.json());
+app.use(cookieParser());
 
 // link router file
 app.use(require("./router/router"));

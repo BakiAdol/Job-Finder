@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Logout from "../Logout/Logout";
 import "./Navbar.css";
 import NavLinkItems from "./NavLInkItems";
 
@@ -27,7 +28,7 @@ export default function Navbar() {
           <NavLink className="joinLink" to="/register">
             Join
           </NavLink>
-          ;
+          <Logout />
         </div>
       </div>
     </div>
