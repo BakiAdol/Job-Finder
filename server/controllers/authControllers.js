@@ -74,4 +74,16 @@ module.exports = {
       })
       .send();
   },
+  async loggendInFunction(req, res) {
+    try {
+      const token = req.cookies.token;
+      if (!token) {
+        return res.json({ logRes: false });
+      }
+      jwt.verify(token, process.env.SECRET_KEY);
+      res.json({ logRes: true });
+    } catch (error) {
+      res.json({ logRes: false });
+    }
+  },
 };

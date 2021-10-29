@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 import { inputField, radioField } from "./fieldItems";
 import "./Register.css";
 
 export default function Register() {
   const [errorShow, seterrorShow] = useState("");
+
+  const { getLoggedIn } = useContext(AuthContext);
 
   const history = useHistory();
   const [regData, setRegData] = useState({
@@ -38,6 +41,7 @@ export default function Register() {
     if (res.status === 422) {
       seterrorShow(data.error);
     } else {
+      await getLoggedIn();
       history.push("/");
     }
   };

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 import "../Register/Register.css";
 import { inputField } from "./fieldItems";
 
 export default function Login() {
   const [errorShow, seterrorShow] = useState("");
+
+  const { getLoggedIn } = useContext(AuthContext);
 
   const history = useHistory();
   const [logData, setLogData] = useState({
@@ -34,6 +37,7 @@ export default function Login() {
     if (res.status === 422) {
       seterrorShow(data.error);
     } else {
+      await getLoggedIn();
       history.push("/");
     }
   };

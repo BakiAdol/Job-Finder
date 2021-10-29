@@ -7,10 +7,6 @@ const NavLinkItems = [
     linkName: "Job",
     link: "/jobs",
   },
-  {
-    linkName: "Profile",
-    link: "#",
-  },
 ];
 
 export default NavLinkItems;
