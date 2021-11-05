@@ -26,7 +26,7 @@ export default function Navbar() {
             );
           })}
 
-          {loggedIn === true && (
+          {loggedIn.isLoggedIn === true && (
             <NavLink
               exact
               activeClassName="navActive"
@@ -38,13 +38,13 @@ export default function Navbar() {
           )}
         </div>
         <div className="navJoin">
-          {loggedIn === false && (
+          {loggedIn.isLoggedIn === false && (
             <NavLink className="joinLink" to="/register">
               Join
             </NavLink>
           )}
 
-          {loggedIn === true && <Logout />}
+          {loggedIn.isLoggedIn === true && <Logout />}
         </div>
       </div>
     </div>

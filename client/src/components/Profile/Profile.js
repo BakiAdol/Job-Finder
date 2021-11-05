@@ -8,7 +8,9 @@ import "./Profile.css";
 import profileLinkItem from "./profileLinkItem";
 import Projects from "./Projects/Projects";
 
-export default function Profile({ match }) {
+export default function Profile(props) {
+  console.log("User id ", props.userId);
+
   return (
     <div className="profileContainer">
       <div className="profileHeader">
@@ -29,7 +31,7 @@ export default function Profile({ match }) {
                 <Link
                   className="linkItem"
                   key={pos}
-                  to={match.path + item.link}
+                  to={props.match.path + item.link}
                 >
                   {item.linkName}
                 </Link>
@@ -37,14 +39,18 @@ export default function Profile({ match }) {
             })}
           </div>
           <Switch>
-            <Route exact path={match.path + "/"} component={Projects} />
+            <Route exact path={props.match.path + "/"} component={Projects} />
             <Route
               exact
-              path={match.path + "/experiences"}
+              path={props.match.path + "/experiences"}
               component={Experiences}
             />
-            <Route exact path={match.path + "/jobs"} component={Jobs} />
-            <Route exact path={match.path + "/applies"} component={Applies} />
+            <Route exact path={props.match.path + "/jobs"} component={Jobs} />
+            <Route
+              exact
+              path={props.match.path + "/applies"}
+              component={Applies}
+            />
           </Switch>
         </div>
       </div>

@@ -17,14 +17,21 @@ export default function Router() {
         <Route exact path="/" component={Home} />
         <Route exact path="/jobs" component={Job} />
 
-        {loggedIn === false && (
+        {loggedIn.isLoggedIn === false && (
           <>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
           </>
         )}
 
-        {loggedIn === true && <Route path="/profile" component={Profile} />}
+        {loggedIn.isLoggedIn === true && (
+          <Route
+            path="/profile"
+            render={(props) => (
+              <Profile {...props} userId={loggedIn.rootUserId} />
+            )}
+          />
+        )}
       </Switch>
     </BrowserRouter>
   );

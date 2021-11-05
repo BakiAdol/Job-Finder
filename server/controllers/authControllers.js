@@ -26,7 +26,7 @@ module.exports = {
       const newUser = new User({ uName, uEmail, uPassword: hasPass, uGender });
 
       await newUser.save();
-      let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+      let token = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY);
       res.cookie("token", token, {
         expires: new Date(Date.now() + 25892000000),
         httpOnly: true,
@@ -54,7 +54,8 @@ module.exports = {
         return res.status(422).json({ error: "Wrong email or password!" });
       }
 
-      let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+      let token = jwt.sign({ _id: userExist._id }, process.env.SECRET_KEY);
+
       res.cookie("token", token, {
         expires: new Date(Date.now() + 25892000000),
         httpOnly: true,
@@ -78,12 +79,14 @@ module.exports = {
     try {
       const token = req.cookies.token;
       if (!token) {
-        return res.json({ logRes: false });
+        return res.json({ isLoggedIn: false });
       }
-      jwt.verify(token, process.env.SECRET_KEY);
-      res.json({ logRes: true });
+
+      const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+
+      res.json({ isLoggedIn: true, rootUserId: verifyToken._id });
     } catch (error) {
-      res.json({ logRes: false });
+      res.json({ isLoggedIn: false });
     }
   },
 };
