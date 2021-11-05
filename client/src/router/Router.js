@@ -4,6 +4,7 @@ import Home from "../components/Home/Home";
 import Job from "../components/Job/Job";
 import Login from "../components/Login/Login";
 import Navbar from "../components/Navbar/Navbar";
+import Profile from "../components/Profile/Profile";
 import Register from "../components/Register/Register";
 import AuthContext from "../context/AuthContext";
 
@@ -23,9 +24,7 @@ export default function Router() {
           </>
         )}
 
-        {loggedIn === true && (
-          <Route exact path="/profile" component={Register} />
-        )}
+        {loggedIn === true && <Route path="/profile" component={Profile} />}
       </Switch>
     </BrowserRouter>
   );

@@ -6,21 +6,36 @@ div.jobCard {
   margin-bottom: 1rem;
 }
 
-div.jobCard a {
-  text-decoration: none;
-  font-weight: 700;
-  display: block;
-  padding: 0.5rem 0.5rem 0 0.5rem;
-  letter-spacing: 0.05rem;
-  color: var(--c-primary);
+div.jobCard div.jobCardHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
-div.jobCard p.dateShow {
+div.jobCard a {
+  text-decoration: none;
+  color: var(--c-primary);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+div.jobCard div.userNameShow {
+  padding: 0.5rem 0 0 0.5rem;
+}
+
+div.jobCard div.dateShow {
+  height: fit-content;
+  padding: 0 0.1rem 0.2rem 1rem;
+  color: black;
+  font-weight: 500;
+}
+
+/* div.jobCard p.dateShow {
   color: var(--c-mid-gray);
   padding-left: 0.5rem;
   padding-top: 0.2rem;
   font-size: 0.8em;
-}
+} */
+
 div.jobCard h2.titleShow {
   font-size: 1.2rem;
   padding: 0.3rem 0.5rem 0.3rem 0.5rem;

@@ -1,0 +1,28 @@
+div.projectBody {
+  background-color: var(--c-white);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+div.projectBody .projectNameButton,
+.projectSmallButton {
+  width: 100%;
+  background-color: var(--c-white-gray);
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.projectSmallButtonDiv {
+  width: 25%;
+  margin: 0 auto;
+}
+.projectSmallButton {
+  background-color: var(--c-primary);
+  color: var(--c-white);
+}
+
+div.projectBody p {
+  padding: 0.5rem;
+}
