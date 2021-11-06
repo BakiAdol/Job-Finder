@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import Applies from "./Applies";
-import Bio from "./Bio";
+import Bio from "./Bio/Bio";
 import Experiences from "./Experiences";
 import Jobs from "./Jobs";
 import "./Profile.css";

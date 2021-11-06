@@ -20,3 +20,20 @@ body {
   font-family: var(--f-lato);
   background-color: var(--c-light-gray);
 }
+
+.marginZeroAuto {
+  margin: 0 auto;
+}
+.width35p {
+  width: 35%;
+}
+
+.primaryButton {
+  background-color: var(--c-primary);
+  color: var(--c-white);
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  width: 100%;
+}

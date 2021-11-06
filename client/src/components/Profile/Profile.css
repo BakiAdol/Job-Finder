@@ -44,9 +44,10 @@ div.profileContainer div.profileBody div.profileLeftBody {
   width: 40%;
   font-size: 1rem;
   margin-right: 0.5rem;
-  padding: 0.5rem;
+
   background-color: var(--c-white);
   height: fit-content;
+  position: relative;
 }
 div.profileContainer div.profileBody div.profileRightBody {
   width: 60%;
@@ -66,30 +67,6 @@ div.profileLinks .linkItem {
   padding: 0 0.4rem;
   color: var(--c-dark-gray);
   font-weight: 600;
-}
-
-/*---------biography-------------*/
-
-div.bioContainer div.bioRowsBlock {
-  display: flex;
-  justify-content: flex-start;
-  color: var(--c-dark-gray);
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.bioIconsBody {
-  font-size: 1.5rem;
-  color: var(--c-mid-gray);
-}
-
-div.bioContainer div.bioRowsBlock p {
-  margin: 0 0 0.5rem 0.5rem;
-}
-
-.bioRowsBlockLInks {
-  text-decoration: none;
-  color: var(--c-primary);
 }
 
 @media only screen and (max-width: 1000px) {
