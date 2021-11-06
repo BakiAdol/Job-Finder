@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 import Applies from "./Applies";
 import Bio from "./Bio";
 import Experiences from "./Experiences";
@@ -9,20 +10,29 @@ import profileLinkItem from "./profileLinkItem";
 import Projects from "./Projects/Projects";
 
 export default function Profile(props) {
-  console.log("User id ", props.userId);
+  const { userInfo, getUserDetails } = useContext(UserContext);
+  const [dataLoading, setDataLoading] = useState(true);
+  useEffect(() => {
+    async function fetchUserInfo(userId) {
+      await getUserDetails(userId);
+      setDataLoading(false);
+    }
+    fetchUserInfo(props.userId);
+  }, []);
 
+  if (dataLoading === true) return <></>;
   return (
     <div className="profileContainer">
       <div className="profileHeader">
         <img src={require("../../images/me.jpg").default} alt="" />
         <div className="nameEmail">
-          <p>Abdullahil Baki Adol</p>
-          <p>joyaadol@gmail.com</p>
+          <p>{userInfo.uName}</p>
+          <p>{userInfo.uEmail}</p>
         </div>
       </div>
       <div className="profileBody">
         <div className="profileLeftBody">
-          <Bio />
+          <Bio {...props} />
         </div>
         <div className="profileRightBody">
           <div className="profileLinks">

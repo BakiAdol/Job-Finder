@@ -5,6 +5,7 @@ const {
   loginFunction,
   logoutFunction,
   loggendInFunction,
+  getUserFunction,
 } = require("../controllers/authControllers");
 
 // register
@@ -18,5 +19,8 @@ router.get("/logout", logoutFunction);
 
 // loggedIn
 router.get("/loggedin", loggendInFunction);
+
+// get user
+router.post("/user/userdata", getUserFunction);
 
 module.exports = router;

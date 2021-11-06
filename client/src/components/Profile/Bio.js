@@ -1,32 +1,27 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { MdHouse, MdLanguage, MdSchool } from "react-icons/md";
 import { Link } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
-export default function Bio() {
-  const hyperLinks = [
-    {
-      linkName: "Facebook",
-      link: "www.facebook.com",
-    },
-    {
-      linkName: "Google",
-      link: "www.google.com",
-    },
-    {
-      linkName: "Codeforces",
-      link: "www.codeforces.com",
-    },
-  ];
-  const addresses = ["Lives in Dhaka, Bangladesh", "Lives in Canada", "London"];
-  const educations = [
-    "Studies B. Sc in Computer Science & Engineering (CSE) at Daffodil International University",
-    "Studies B. Sc in Computer Science & Engineering (CSE) at Daffodil International University",
-  ];
+export default function Bio(props) {
+  const { userInfo, getUserDetails } = useContext(UserContext);
+  const [dataLoading, setDataLoading] = useState(true);
+  useEffect(() => {
+    async function fetchUserInfo(userId) {
+      await getUserDetails(userId);
+      setDataLoading(false);
+    }
+
+    fetchUserInfo(props.userId);
+  }, []);
+
+  if (dataLoading === true) return <></>;
+
   return (
     <IconContext.Provider value={{ className: "bioIcons" }}>
       <div className="bioContainer">
-        {educations.map((item, pos) => {
+        {userInfo.uEducations.map((item, pos) => {
           return (
             <div className="bioRowsBlock" key={pos}>
               <div className="bioIconsBody">
@@ -36,7 +31,7 @@ export default function Bio() {
             </div>
           );
         })}
-        {addresses.map((item, pos) => {
+        {userInfo.uAddress.map((item, pos) => {
           return (
             <div className="bioRowsBlock" key={pos}>
               <div className="bioIconsBody">
@@ -46,8 +41,8 @@ export default function Bio() {
             </div>
           );
         })}
-
-        {hyperLinks.map((item, pos) => {
+        <p>{userInfo.uGender}</p>
+        {userInfo.uLinks.map((item, pos) => {
           return (
             <div className="bioRowsBlock bioRowsBlockLInks" key={pos}>
               <div className="bioIconsBody">
@@ -56,18 +51,17 @@ export default function Bio() {
               <p>
                 <Link
                   to={{
-                    pathname: "http://" + item.link,
+                    pathname: "http://" + item.uLink,
                   }}
                   target="_blank"
                   className="bioRowsBlockLInks"
                 >
-                  {item.linkName}
+                  {item.uLinkName}
                 </Link>
               </p>
             </div>
           );
         })}
-
         <div className="cvContainer">CV</div>
       </div>
     </IconContext.Provider>

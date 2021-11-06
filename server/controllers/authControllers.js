@@ -63,7 +63,6 @@ module.exports = {
 
       return res.status(201).json({ msg: "Login in successfull!" });
     } catch (error) {
-      console.log(error);
       return res.status(422).json({ error: "Server error!" });
     }
   },
@@ -87,6 +86,15 @@ module.exports = {
       res.json({ isLoggedIn: true, rootUserId: verifyToken._id });
     } catch (error) {
       res.json({ isLoggedIn: false });
+    }
+  },
+  async getUserFunction(req, res) {
+    try {
+      const userId = req.body.userId;
+      const UserInfo = await User.findOne({ _id: userId });
+      res.json({ uInfo: UserInfo });
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
     }
   },
 };
