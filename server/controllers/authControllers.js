@@ -97,4 +97,25 @@ module.exports = {
       return res.status(422).json({ error: "Server error!" });
     }
   },
+
+  async updaetBioFunction(req, res) {
+    try {
+      const { userId, userEdu, userAddr, userLink } = req.body;
+      console.log(req.body, userId);
+      const updateInfo = await User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            uEducations: userEdu,
+            uAddress: userAddr,
+            uLinks: userLink,
+          },
+        }
+      );
+      console.log(updateInfo);
+      res.json({ success: "Update successful!" });
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
+    }
+  },
 };

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MdAdd, MdClear, MdHouse, MdLanguage, MdSchool } from "react-icons/md";
+import UserContext from "../../../context/UserContext";
 
 export default function EditBio(props) {
+  const { getUserDetails } = useContext(UserContext);
   const [education, seteducation] = useState(props.userInfo.uEducations);
   const [newEdu, setnewEdu] = useState("");
 
@@ -231,8 +233,25 @@ export default function EditBio(props) {
 
       <div className="bioSaveExit">
         <button
-          onClick={() => {
-            props.userInfo.uEducations = education;
+          onClick={async () => {
+            const userEdu = education;
+            const userAddr = address;
+            const userLink = link;
+            const userId = props.userInfo._id;
+
+            const res = await fetch("/profileupdate/bio", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                userId,
+                userEdu,
+                userAddr,
+                userLink,
+              }),
+            });
+            await getUserDetails(userId);
             props.setEditBio(false);
           }}
         >

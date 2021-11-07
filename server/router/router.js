@@ -6,6 +6,7 @@ const {
   logoutFunction,
   loggendInFunction,
   getUserFunction,
+  updaetBioFunction,
 } = require("../controllers/authControllers");
 
 // register
@@ -22,5 +23,8 @@ router.get("/loggedin", loggendInFunction);
 
 // get user
 router.post("/user/userdata", getUserFunction);
+
+// update user bio
+router.post("/profileupdate/bio", updaetBioFunction);
 
 module.exports = router;
