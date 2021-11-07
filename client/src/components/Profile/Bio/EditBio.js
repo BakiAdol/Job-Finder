@@ -63,11 +63,14 @@ export default function EditBio(props) {
 
   return (
     <div className="bioContainer">
+      <div className="profileBioTitle">Edit Bio</div>
       <div className="editEduCon">
         {education.map((item, pos) => {
           return (
-            <div key={pos}>
-              <MdSchool />
+            <div className="editBioRow" key={pos}>
+              <div className="bioIconsBody">
+                <MdSchool />
+              </div>
               <input
                 type="text"
                 value={item}
@@ -80,14 +83,18 @@ export default function EditBio(props) {
                   seteducation(education.filter((itm, p) => p !== pos));
                 }}
               >
-                <MdClear />
+                <div className="bioIconsButton">
+                  <MdClear />
+                </div>
               </button>
             </div>
           );
         })}
 
-        <div>
-          <MdSchool />
+        <div className="editBioRow editBioRowNew">
+          <div className="bioIconsBody">
+            <MdSchool />
+          </div>
           <input
             type="text"
             placeholder="Enter Education"
@@ -98,7 +105,9 @@ export default function EditBio(props) {
             name={"newEdu"}
           />
           <button onClick={addNewEdu}>
-            <MdAdd />
+            <div className="bioIconsButton" style={{ color: "green" }}>
+              <MdAdd />
+            </div>
           </button>
         </div>
       </div>
@@ -106,8 +115,10 @@ export default function EditBio(props) {
       <div className="editAddrCon">
         {address.map((item, pos) => {
           return (
-            <div key={pos}>
-              <MdHouse />
+            <div className="editBioRow" key={pos}>
+              <div className="bioIconsBody">
+                <MdHouse />
+              </div>
               <input
                 type="text"
                 value={item}
@@ -120,14 +131,18 @@ export default function EditBio(props) {
                   setAddress(address.filter((itm, p) => p !== pos));
                 }}
               >
-                <MdClear />
+                <div className="bioIconsButton">
+                  <MdClear />
+                </div>
               </button>
             </div>
           );
         })}
 
-        <div>
-          <MdHouse />
+        <div className="editBioRow">
+          <div className="bioIconsBody">
+            <MdHouse />
+          </div>
           <input
             type="text"
             placeholder="Enter Addresss"
@@ -138,22 +153,27 @@ export default function EditBio(props) {
             name={"newEdu"}
           />
           <button onClick={addNewAddr}>
-            <MdAdd />
+            <div className="bioIconsButton" style={{ color: "green" }}>
+              <MdAdd />
+            </div>
           </button>
         </div>
       </div>
 
-      <div className="linkEditDiv">
+      <div className="editLinkCon">
         {link.map((item, pos) => {
           return (
-            <div key={pos}>
-              <MdLanguage />
+            <div className="editBioRow" key={pos}>
+              <div className="bioIconsBody">
+                <MdLanguage />
+              </div>
               <input
                 type="text"
                 id={pos}
                 value={item.uLinkName}
                 name="uLinkName"
                 onChange={linkInputHandle}
+                style={{ width: "40%" }}
               />
               <input
                 type="text"
@@ -161,6 +181,7 @@ export default function EditBio(props) {
                 value={item.uLink}
                 name="uLink"
                 onChange={linkInputHandle}
+                style={{ width: "40%" }}
               />
 
               <button
@@ -168,26 +189,32 @@ export default function EditBio(props) {
                   setLink(link.filter((itm, p) => p !== pos));
                 }}
               >
-                <MdClear />
+                <div className="bioIconsButton">
+                  <MdClear />
+                </div>
               </button>
             </div>
           );
         })}
 
-        <div>
-          <MdLanguage />
+        <div className="editBioRow">
+          <div className="bioIconsBody">
+            <MdLanguage />
+          </div>
           <input
             type="text"
             placeholder="Enter Link Name"
             value={newLink.uLinkName}
             name="uLinkName"
+            style={{ width: "40%" }}
             onChange={(e) => {
               setnewLink({ ...newLink, [e.target.name]: e.target.value });
             }}
           />
           <input
             type="text"
-            placeholder="Enter url"
+            placeholder="www."
+            style={{ width: "40%" }}
             onChange={(e) => {
               setnewLink({ ...newLink, [e.target.name]: e.target.value });
             }}
@@ -195,23 +222,23 @@ export default function EditBio(props) {
             name="uLink"
           />
           <button onClick={addNewLink}>
-            <MdAdd />
+            <div className="bioIconsButton" style={{ color: "green" }}>
+              <MdAdd />
+            </div>
           </button>
         </div>
       </div>
 
-      <div>
+      <div className="bioSaveExit">
         <button
           onClick={() => {
             props.userInfo.uEducations = education;
-            console.log(props.userInfo);
             props.setEditBio(false);
           }}
         >
           Update Bio
         </button>
-      </div>
-      <div>
+
         <button
           onClick={() => {
             props.setEditBio(false);

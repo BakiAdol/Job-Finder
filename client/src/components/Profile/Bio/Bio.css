@@ -36,3 +36,62 @@ div.bioContainer div.bioRowsBlock p {
   height: 5rem;
   position: absolute;
 }
+
+.editBioRow {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.3rem;
+}
+
+div.editBioRow input {
+  width: 80%;
+  border: none;
+  border-bottom: 0.1rem solid gray;
+  font-size: 1rem;
+  color: var(--c-mid-gray);
+  font-weight: 600;
+  opacity: 0.8;
+}
+div.editBioRow input:focus {
+  outline: none;
+}
+
+div.editBioRow input::placeholder {
+  opacity: 0.5;
+}
+
+.bioIconsButton {
+  color: red;
+  font-size: 1.2rem;
+}
+
+div.editBioRow button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.editEduCon,
+.editAddrCon,
+.editLinkCon {
+  padding-bottom: 1rem;
+}
+
+.editBioRowNew {
+  padding-top: 0.6rem;
+}
+
+.bioSaveExit {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.bioSaveExit button {
+  color: var(--c-white);
+  background-color: var(--c-primary);
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
