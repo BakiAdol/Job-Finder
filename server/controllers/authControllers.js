@@ -101,7 +101,6 @@ module.exports = {
   async updaetBioFunction(req, res) {
     try {
       const { userId, userEdu, userAddr, userLink } = req.body;
-      console.log(req.body, userId);
       const updateInfo = await User.updateOne(
         { _id: userId },
         {
@@ -112,7 +111,40 @@ module.exports = {
           },
         }
       );
-      console.log(updateInfo);
+      res.json({ success: "Update successful!" });
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
+    }
+  },
+
+  async updateExperiencesFunction(req, res) {
+    try {
+      const { userId, uExperiences } = req.body;
+      const updateInfo = await User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            uExperiences,
+          },
+        }
+      );
+      res.json({ success: "Update successful!" });
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
+    }
+  },
+
+  async updateProjectsFunction(req, res) {
+    try {
+      const { userId, uProjects } = req.body;
+      const updateInfo = await User.updateOne(
+        { _id: userId },
+        {
+          $set: {
+            uProjects,
+          },
+        }
+      );
       res.json({ success: "Update successful!" });
     } catch (err) {
       return res.status(422).json({ error: "Server error!" });

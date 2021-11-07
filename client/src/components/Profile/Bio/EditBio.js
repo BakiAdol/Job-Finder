@@ -239,7 +239,7 @@ export default function EditBio(props) {
             const userLink = link;
             const userId = props.userInfo._id;
 
-            const res = await fetch("/profileupdate/bio", {
+            await fetch("/profileupdate/bio", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

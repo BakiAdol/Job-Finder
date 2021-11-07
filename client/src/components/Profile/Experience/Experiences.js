@@ -1,102 +1,101 @@
 import React, { useContext, useState } from "react";
 import { MdAdd, MdClear } from "react-icons/md";
 import UserContext from "../../../context/UserContext";
-import "./Projects.css";
-import ProjectsCard from "./ProjectsCard";
+import ExperienceCard from "./ExperienceCard";
 
-export default function Projects() {
+export default function Experiences() {
   const { userInfo, getUserDetails } = useContext(UserContext);
 
-  const [editPro, seteditPro] = useState(userInfo.uProjects);
+  const [editExp, seteditExp] = useState(userInfo.uExperiences);
 
-  const [editProjects, setediteditProjects] = useState(false);
+  const [editExperience, seteditExperience] = useState(false);
 
-  const updateProjects = async () => {
-    const uProjects = editPro;
+  const updateExperiences = async () => {
+    const uExperiences = editExp;
     const userId = userInfo._id;
-    await fetch("/profileupdate/projects", {
+    await fetch("/profileupdate/experiences", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         userId,
-        uProjects,
+        uExperiences,
       }),
     });
     await getUserDetails(userId);
-    setediteditProjects(false);
+    seteditExperience(false);
   };
 
-  // new project
-  const [newPro, setnewPro] = useState({
-    pName: "",
-    pDetails: "",
+  // new experiences
+  const [newExp, setnewExp] = useState({
+    eName: "",
+    eDetails: "",
   });
 
   return (
     <div>
-      {editProjects ? (
+      {editExperience ? (
         <div className="editProfilesBody">
-          <h3 className="editProTitle">Edit Project</h3>
-          {editPro.map((item, pos) => {
+          <h3 className="editProTitle">Edit Experiences</h3>
+          {editExp.map((item, pos) => {
             return (
               <div className="editProItemBody" key={pos}>
                 <div className="editTitleRemoveRow">
                   <input
                     type="text"
-                    value={editPro[pos].pName}
-                    placeholder="Project Title"
+                    value={editExp[pos].eName}
+                    placeholder="Experience Title"
                     onChange={(e) => {
-                      const newEditPro = [...editPro];
-                      newEditPro[pos].pName = e.target.value;
-                      seteditPro(newEditPro);
+                      const newEditExp = [...editExp];
+                      newEditExp[pos].eName = e.target.value;
+                      seteditExp(newEditExp);
                     }}
                   />
 
                   <div
                     className="profileIconButton textColorRed"
                     onClick={() => {
-                      seteditPro(editPro.filter((tem, p) => p !== pos));
+                      seteditExp(editExp.filter((tem, p) => p !== pos));
                     }}
                   >
                     <MdClear />
                   </div>
                 </div>
                 <textarea
-                  value={editPro[pos].pDetails}
-                  placeholder="Project Details"
+                  value={editExp[pos].eDetails}
+                  placeholder="Experience Details"
                   onChange={(e) => {
-                    const newEditPro = [...editPro];
-                    newEditPro[pos].pDetails = e.target.value;
-                    seteditPro(newEditPro);
+                    const newEditExp = [...editExp];
+                    newEditExp[pos].eDetails = e.target.value;
+                    seteditExp(newEditExp);
                   }}
                 />
               </div>
             );
           })}
-          <p className="profileMiniLeftTitle">Add new Projects</p>
+          <p className="profileMiniLeftTitle">Add new experiences</p>
           <div className="editProItemBody">
             <div className="editTitleRemoveRow">
               <input
                 type="text"
-                value={newPro.pName}
-                placeholder="Project Title"
+                value={newExp.eName}
+                placeholder="Experience Title"
                 onChange={(e) => {
-                  const tmpPro = { ...newPro };
-                  tmpPro.pName = e.target.value;
-                  setnewPro(tmpPro);
+                  const tmpEx = { ...newExp };
+                  tmpEx.eName = e.target.value;
+                  setnewExp(tmpEx);
                 }}
               />
 
               <div
                 className="profileIconButton textColorGreen"
                 onClick={() => {
-                  if (newPro.pName !== "" && newPro.pDetails !== "") {
-                    seteditPro([...editPro, newPro]);
-                    setnewPro({
-                      pName: "",
-                      pDetails: "",
+                  if (newExp.eName !== "" && newExp.eDetails !== "") {
+                    seteditExp([...editExp, newExp]);
+                    setnewExp({
+                      eName: "",
+                      eDetails: "",
                     });
                   }
                 }}
@@ -105,22 +104,22 @@ export default function Projects() {
               </div>
             </div>
             <textarea
-              value={newPro.pDetails}
-              placeholder="Project Details"
+              value={newExp.eDetails}
+              placeholder="Experience Details"
               onChange={(e) => {
-                const tmpPro = { ...newPro };
-                tmpPro.pDetails = e.target.value;
-                setnewPro(tmpPro);
+                const tmpEx = { ...newExp };
+                tmpEx.eDetails = e.target.value;
+                setnewExp(tmpEx);
               }}
             />
           </div>
           <div className="addCancleEditProItems">
-            <button className="primaryButton" onClick={updateProjects}>
+            <button className="primaryButton" onClick={updateExperiences}>
               Save Experiences
             </button>
             <button
               className="primaryButton"
-              onClick={() => setediteditProjects(false)}
+              onClick={() => seteditExperience(false)}
             >
               Cancel
             </button>
@@ -128,16 +127,16 @@ export default function Projects() {
         </div>
       ) : (
         <div>
-          {userInfo.uProjects.map((item, pos) => {
-            return <ProjectsCard project={item} key={pos} />;
+          {userInfo.uExperiences.map((item, pos) => {
+            return <ExperienceCard experience={item} key={pos} />;
           })}
 
           <div className="profileSingleCenterButton">
             <button
               className="primaryButton"
-              onClick={() => setediteditProjects(true)}
+              onClick={() => seteditExperience(true)}
             >
-              Add or Edit Projects
+              Add or Edit Experiences
             </button>
           </div>
         </div>

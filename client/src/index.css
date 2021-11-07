@@ -21,6 +21,14 @@ body {
   background-color: var(--c-light-gray);
 }
 
+.textColorRed {
+  color: red;
+}
+
+.textColorGreen {
+  color: green;
+}
+
 .marginZeroAuto {
   margin: 0 auto;
 }
@@ -35,5 +43,4 @@ body {
   border: none;
   cursor: pointer;
   font-weight: 600;
-  width: 100%;
 }

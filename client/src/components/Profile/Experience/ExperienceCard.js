@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import "./Projects.css";
 
-export default function ProjectsCard({ project }) {
+export default function ExperienceCard({ experience }) {
   const [show, setShow] = useState(false);
   return (
     <div className="profileCard">
       <button onClick={() => setShow(!show)} className="profileCardTItle">
-        {project.pName}
+        {experience.eName}
       </button>
       {show ? (
-        <div className="profileCardDescription">{project.pDetails}</div>
+        <div className="profileCardDescription">{experience.eDetails}</div>
       ) : (
         <></>
       )}

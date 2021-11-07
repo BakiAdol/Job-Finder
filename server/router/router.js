@@ -7,6 +7,8 @@ const {
   loggendInFunction,
   getUserFunction,
   updaetBioFunction,
+  updateExperiencesFunction,
+  updateProjectsFunction,
 } = require("../controllers/authControllers");
 
 // register
@@ -26,5 +28,11 @@ router.post("/user/userdata", getUserFunction);
 
 // update user bio
 router.post("/profileupdate/bio", updaetBioFunction);
+
+// update user experiences
+router.post("/profileupdate/experiences", updateExperiencesFunction);
+
+// update user profects
+router.post("/profileupdate/projects", updateProjectsFunction);
 
 module.exports = router;

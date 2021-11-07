@@ -3,7 +3,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import UserContext from "../../context/UserContext";
 import Applies from "./Applies";
 import Bio from "./Bio/Bio";
-import Experiences from "./Experiences";
+import Experiences from "./Experience/Experiences";
 import Jobs from "./Jobs";
 import "./Profile.css";
 import profileLinkItem from "./profileLinkItem";
