@@ -19,7 +19,6 @@ export default function Profile(props) {
     }
     fetchUserInfo(props.userId);
   }, []);
-
   if (dataLoading === true) return <></>;
   return (
     <div className="profileContainer">

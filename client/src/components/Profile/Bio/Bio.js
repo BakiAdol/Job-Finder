@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { MdHouse, MdLanguage, MdPerson, MdSchool } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -6,9 +6,20 @@ import UserContext from "../../../context/UserContext";
 import "./Bio.css";
 import EditBio from "./EditBio";
 
-export default function Bio() {
-  const { userInfo } = useContext(UserContext);
+export default function Bio(props) {
+  const { userInfo, getUserDetails } = useContext(UserContext);
+  const [dataLoading, setDataLoading] = useState(true);
   const [editBio, setEditBio] = useState(false);
+  useEffect(() => {
+    async function fetchUserInfo(userId) {
+      await getUserDetails(userId);
+      setDataLoading(false);
+    }
+
+    fetchUserInfo(props.userId);
+  }, []);
+
+  if (dataLoading === true) return <></>;
 
   return (
     <IconContext.Provider value={{ className: "bioIcons" }}>
@@ -64,6 +75,7 @@ export default function Bio() {
               </div>
             );
           })}
+          <div className="cvContainer">CV</div>
           <div className="width35p marginZeroAuto">
             <button className="primaryButton" onClick={() => setEditBio(true)}>
               Edit Profile
