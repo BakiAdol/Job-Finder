@@ -1,11 +1,23 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdAdd, MdClear } from "react-icons/md";
+import AuthContext from "../../../context/AuthContext";
 import UserContext from "../../../context/UserContext";
 import "./Projects.css";
 import ProjectsCard from "./ProjectsCard";
 
-export default function Projects() {
+export default function Projects(props) {
+  const uId = props.match.params.userId;
+  const { loggedIn } = useContext(AuthContext);
   const { userInfo, getUserDetails } = useContext(UserContext);
+  const [dataLoading, setDataLoading] = useState(true);
+  useEffect(() => {
+    async function fetchUserInfo(userId) {
+      await getUserDetails(userId);
+      setDataLoading(false);
+    }
+
+    fetchUserInfo(uId);
+  }, [uId]);
 
   const [editPro, seteditPro] = useState(userInfo.uProjects);
 
@@ -33,6 +45,8 @@ export default function Projects() {
     pName: "",
     pDetails: "",
   });
+
+  if (dataLoading === true) return <></>;
 
   return (
     <div>
@@ -132,14 +146,16 @@ export default function Projects() {
             return <ProjectsCard project={item} key={pos} />;
           })}
 
-          <div className="profileSingleCenterButton">
-            <button
-              className="primaryButton"
-              onClick={() => setediteditProjects(true)}
-            >
-              Add or Edit Projects
-            </button>
-          </div>
+          {loggedIn.rootUserId === uId && (
+            <div className="profileSingleCenterButton">
+              <button
+                className="primaryButton"
+                onClick={() => setediteditProjects(true)}
+              >
+                Add or Edit Projects
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -10,15 +10,19 @@ import profileLinkItem from "./profileLinkItem";
 import Projects from "./Projects/Projects";
 
 export default function Profile(props) {
+  const uId = props.match.params.userId;
+  const currentUrl = props.match.url;
+
   const { userInfo, getUserDetails } = useContext(UserContext);
   const [dataLoading, setDataLoading] = useState(true);
+
   useEffect(() => {
     async function fetchUserInfo(userId) {
       await getUserDetails(userId);
       setDataLoading(false);
     }
-    fetchUserInfo(props.userId);
-  }, []);
+    fetchUserInfo(uId);
+  }, [uId]);
   if (dataLoading === true) return <></>;
   return (
     <div className="profileContainer">
@@ -31,7 +35,7 @@ export default function Profile(props) {
       </div>
       <div className="profileBody">
         <div className="profileLeftBody">
-          <Bio {...props} />
+          <Bio {...props} userId={uId} />
         </div>
         <div className="profileRightBody">
           <div className="profileLinks">
@@ -40,7 +44,7 @@ export default function Profile(props) {
                 <Link
                   className="linkItem"
                   key={pos}
-                  to={props.match.path + item.link}
+                  to={currentUrl + item.link}
                 >
                   {item.linkName}
                 </Link>
@@ -48,18 +52,17 @@ export default function Profile(props) {
             })}
           </div>
           <Switch>
-            <Route exact path={props.match.path + "/"} component={Projects} />
             <Route
               exact
-              path={props.match.path + "/experiences"}
-              component={Experiences}
+              path="/profile/:userId/"
+              render={() => <Projects {...props} userId={uId} />}
             />
-            <Route exact path={props.match.path + "/jobs"} component={Jobs} />
             <Route
-              exact
-              path={props.match.path + "/applies"}
-              component={Applies}
+              path={"/profile/:userId/experiences"}
+              render={() => <Experiences {...props} userId={uId} />}
             />
+            <Route path="/profile/:userId/jobs" component={Jobs} />
+            <Route path="/profile/:userId/applies" component={Applies} />
           </Switch>
         </div>
       </div>

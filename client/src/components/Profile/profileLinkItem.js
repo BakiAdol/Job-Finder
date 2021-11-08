@@ -1,7 +1,7 @@
 const profileLinkItem = [
   {
     linkName: "Projects",
-    link: "/",
+    link: "",
   },
   {
     linkName: "Experiences",

@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { MdHouse, MdLanguage, MdPerson, MdSchool } from "react-icons/md";
 import { Link } from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
 import UserContext from "../../../context/UserContext";
 import "./Bio.css";
 import EditBio from "./EditBio";
 
 export default function Bio(props) {
+  const { loggedIn } = useContext(AuthContext);
   const { userInfo, getUserDetails } = useContext(UserContext);
   const [dataLoading, setDataLoading] = useState(true);
   const [editBio, setEditBio] = useState(false);
@@ -76,11 +78,16 @@ export default function Bio(props) {
             );
           })}
           <div className="cvContainer">CV</div>
-          <div className="width35p marginZeroAuto">
-            <button className="primaryButton" onClick={() => setEditBio(true)}>
-              Edit Profile
-            </button>
-          </div>
+          {loggedIn.rootUserId === props.userId && (
+            <div className="width35p marginZeroAuto">
+              <button
+                className="primaryButton"
+                onClick={() => setEditBio(true)}
+              >
+                Edit Profile
+              </button>
+            </div>
+          )}
         </div>
       )}
     </IconContext.Provider>

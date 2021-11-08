@@ -1,10 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdAdd, MdClear } from "react-icons/md";
+import AuthContext from "../../../context/AuthContext";
 import UserContext from "../../../context/UserContext";
 import ExperienceCard from "./ExperienceCard";
 
-export default function Experiences() {
+export default function Experiences(props) {
+  const uId = props.match.params.userId;
+  const { loggedIn } = useContext(AuthContext);
   const { userInfo, getUserDetails } = useContext(UserContext);
+  const [dataLoading, setDataLoading] = useState(true);
+  useEffect(() => {
+    async function fetchUserInfo(userId) {
+      await getUserDetails(userId);
+      setDataLoading(false);
+    }
+
+    fetchUserInfo(uId);
+  }, [uId]);
 
   const [editExp, seteditExp] = useState(userInfo.uExperiences);
 
@@ -32,6 +44,8 @@ export default function Experiences() {
     eName: "",
     eDetails: "",
   });
+
+  if (dataLoading === true) return <></>;
 
   return (
     <div>
@@ -131,14 +145,16 @@ export default function Experiences() {
             return <ExperienceCard experience={item} key={pos} />;
           })}
 
-          <div className="profileSingleCenterButton">
-            <button
-              className="primaryButton"
-              onClick={() => seteditExperience(true)}
-            >
-              Add or Edit Experiences
-            </button>
-          </div>
+          {loggedIn.rootUserId === uId && (
+            <div className="profileSingleCenterButton">
+              <button
+                className="primaryButton"
+                onClick={() => seteditExperience(true)}
+              >
+                Add or Edit Experiences
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -30,7 +30,7 @@ export default function Navbar() {
             <NavLink
               exact
               activeClassName="navActive"
-              to="/profile"
+              to={"/profile/" + loggedIn.rootUserId}
               className="navLink"
             >
               Profile

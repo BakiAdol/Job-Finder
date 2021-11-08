@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Profile from "../components/Profile/Profile";
 import Register from "../components/Register/Register";
 import AuthContext from "../context/AuthContext";
+import { UserContextProvider } from "../context/UserContext";
 
 export default function Router() {
   const { loggedIn } = useContext(AuthContext);
@@ -26,9 +27,13 @@ export default function Router() {
 
         {loggedIn.isLoggedIn === true && (
           <Route
-            path="/profile"
+            path="/profile/:userId"
             render={(props) => (
-              <Profile {...props} userId={loggedIn.rootUserId} />
+              // <Profile {...props} userId={loggedIn.rootUserId} />
+
+              <UserContextProvider>
+                <Profile {...props} />
+              </UserContextProvider>
             )}
           />
         )}
