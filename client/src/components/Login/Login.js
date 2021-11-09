@@ -43,27 +43,29 @@ export default function Login() {
   };
 
   return (
-    <div className="regContainer">
-      <h1>Sign In</h1>
-      <p className="errorShow">{errorShow}</p>
-      <form className="regForm" method="POST" onSubmit={submitLogData}>
-        {inputField.map((items, pos) => {
-          return (
-            <input
-              name={items.value}
-              key={pos}
-              value={logData.value}
-              onChange={handleInput}
-              type={items.type}
-              placeholder={items.placeHolder}
-            />
-          );
-        })}
-        <button type="submit">Log In</button>
-      </form>
-      <div className="alreadyAccount">
-        <p>Not have an account?</p>
-        <Link to="/register"> Register</Link>
+    <div className="minHeight80vh">
+      <div className="regContainer">
+        <h1>Sign In</h1>
+        <p className="errorShow">{errorShow}</p>
+        <form className="regForm" method="POST" onSubmit={submitLogData}>
+          {inputField.map((items, pos) => {
+            return (
+              <input
+                name={items.value}
+                key={pos}
+                value={logData.value}
+                onChange={handleInput}
+                type={items.type}
+                placeholder={items.placeHolder}
+              />
+            );
+          })}
+          <button type="submit">Log In</button>
+        </form>
+        <div className="alreadyAccount">
+          <p>Not have an account?</p>
+          <Link to="/register"> Register</Link>
+        </div>
       </div>
     </div>
   );

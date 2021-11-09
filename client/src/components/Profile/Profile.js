@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import UserContext from "../../context/UserContext";
-import Applies from "./Applies";
+import Applie from "./Applie/Applie";
 import Bio from "./Bio/Bio";
 import Experiences from "./Experience/Experiences";
 import Jobs from "./Jobs";
@@ -25,7 +25,7 @@ export default function Profile(props) {
   }, [uId]);
   if (dataLoading === true) return <></>;
   return (
-    <div className="profileContainer">
+    <div className="profileContainer minHeight80vh">
       <div className="profileHeader">
         <img src={require("../../images/me.jpg").default} alt="" />
         <div className="nameEmail">
@@ -62,7 +62,7 @@ export default function Profile(props) {
               render={() => <Experiences {...props} userId={uId} />}
             />
             <Route path="/profile/:userId/jobs" component={Jobs} />
-            <Route path="/profile/:userId/applies" component={Applies} />
+            <Route path="/profile/:userId/applies" component={Applie} />
           </Switch>
         </div>
       </div>

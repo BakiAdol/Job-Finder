@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   uAddress: [String],
   uLinks: [{ uLinkName: String, uLink: String }],
   uCv: { type: String },
+  uProfilePic: { type: String },
   uExperiences: [{ eName: String, eDetails: String }],
   uProjects: [{ pName: String, pDetails: String }],
 });

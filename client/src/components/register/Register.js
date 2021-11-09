@@ -46,45 +46,47 @@ export default function Register() {
     }
   };
   return (
-    <div className="regContainer">
-      <h1>Registration</h1>
-      <p className="errorShow">{errorShow}</p>
-      <form method="POST" className="regForm" onSubmit={submitRegData}>
-        {inputField.map((items, pos) => {
-          return (
-            <input
-              name={items.value}
-              key={items.value}
-              value={regData.value}
-              onChange={handleInput}
-              type={items.type}
-              placeholder={items.placeHolder}
-            />
-          );
-        })}
-        <br />
-        <div className="genderContainer">
-          {radioField.map((items, pos) => {
+    <div className="minHeight80vh">
+      <div className="regContainer">
+        <h1>Registration</h1>
+        <p className="errorShow">{errorShow}</p>
+        <form method="POST" className="regForm" onSubmit={submitRegData}>
+          {inputField.map((items, pos) => {
             return (
-              <div key={pos}>
-                <input
-                  type="radio"
-                  name="uGender"
-                  id={items.id}
-                  onChange={handleInput}
-                  value={items.rName}
-                  checked={regData.uGender === items.rName}
-                />
-                <label htmlFor={items.id}>{items.rName}</label>
-              </div>
+              <input
+                name={items.value}
+                key={items.value}
+                value={regData.value}
+                onChange={handleInput}
+                type={items.type}
+                placeholder={items.placeHolder}
+              />
             );
           })}
+          <br />
+          <div className="genderContainer">
+            {radioField.map((items, pos) => {
+              return (
+                <div key={pos}>
+                  <input
+                    type="radio"
+                    name="uGender"
+                    id={items.id}
+                    onChange={handleInput}
+                    value={items.rName}
+                    checked={regData.uGender === items.rName}
+                  />
+                  <label htmlFor={items.id}>{items.rName}</label>
+                </div>
+              );
+            })}
+          </div>
+          <button type="submit">Register</button>
+        </form>
+        <div className="alreadyAccount">
+          <p>Already have an account?</p>
+          <Link to="/login"> Sign In</Link>
         </div>
-        <button type="submit">Register</button>
-      </form>
-      <div className="alreadyAccount">
-        <p>Already have an account?</p>
-        <Link to="/login"> Sign In</Link>
       </div>
     </div>
   );

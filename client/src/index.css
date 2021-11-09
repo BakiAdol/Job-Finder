@@ -36,6 +36,10 @@ body {
   width: 35%;
 }
 
+.minHeight80vh {
+  min-height: 80vh;
+}
+
 .primaryButton {
   background-color: var(--c-primary);
   color: var(--c-white);

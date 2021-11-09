@@ -4,7 +4,7 @@ import JobPost from "./JobPost/JobPost";
 
 export default function Home() {
   return (
-    <div>
+    <div className="minHeight80vh">
       <div className="jobPostContainer">
         <JobPost />
       </div>

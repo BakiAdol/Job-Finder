@@ -4,6 +4,8 @@ import UserContext from "../../../context/UserContext";
 
 export default function EditBio(props) {
   const { getUserDetails } = useContext(UserContext);
+
+  // edu
   const [education, seteducation] = useState(props.userInfo.uEducations);
   const [newEdu, setnewEdu] = useState("");
 

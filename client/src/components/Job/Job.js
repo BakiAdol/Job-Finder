@@ -5,7 +5,7 @@ import jobItems from "./jobItems";
 
 export default function Job() {
   return (
-    <div className="jobBody">
+    <div className="jobBody minHeight80vh">
       <div className="jobCards">
         {jobItems.map((items, pos) => {
           return (

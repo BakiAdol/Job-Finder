@@ -1,0 +1,8 @@
+div.footerBody {
+  background-color: var(--c-white);
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--c-dark-gray);
+  font-weight: 600;
+}
