@@ -57,15 +57,23 @@ export default function JobPost() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(jobInp),
+      body: JSON.stringify(data),
     });
 
     const jsRes = await res.json();
     if (res.status === 422) {
       return alert("server errror!");
     }
-
-    console.log(data);
+    alert("Job Post Successfull!");
+    setjobInp({
+      jUserId: "",
+      jDeadline: new Date(),
+      jTitle: "",
+      jDescription: "",
+      jImage: "",
+      jCatagory: CataItems,
+      jApplicants: [],
+    });
   };
 
   return (

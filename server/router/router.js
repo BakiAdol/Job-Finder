@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userSchema");
-
+const { PostNewJobFunction } = require("../controllers/jobController");
 const {
   registerFunction,
   loginFunction,
@@ -39,6 +39,7 @@ router.post("/profileupdate/projects", updateProjectsFunction);
 
 // upload cv
 const multer = require("multer");
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "Images/");
@@ -95,5 +96,9 @@ router.post(
     }
   }
 );
+
+//............................. job router
+// new job post
+router.post("/postnewjob", PostNewJobFunction);
 
 module.exports = router;
