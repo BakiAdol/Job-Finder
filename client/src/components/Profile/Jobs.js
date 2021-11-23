@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import JobCard from "../Job/JobCard";
-import jobItems from "../Job/jobItems";
 
-export default function Jobs() {
+export default function Jobs(props) {
+  const uId = props.match.params.userId;
+  const [jobs, setjobs] = useState([]);
+  useEffect(() => {
+    const headers = { "Content-Type": "application/json" };
+    fetch("/myalljobs", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        jUserId: uId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setjobs(data);
+      });
+  }, []);
   return (
     <div>
-      {jobItems.map((items, pos) => {
+      {jobs.map((items, pos) => {
         return (
           <JobCard
             key={pos}
             className="JobCard"
-            uUser={items.uUser}
-            date={items.date}
-            jobTitle={items.jobTitle}
-            jobDescription={items.jobDescription}
-            image={items.image}
-            jobCatagory={items.jobCatagory}
-            deadline={items.deadline}
+            jUserId={items.jUserId}
+            jUserName="User Name"
+            jPostDate={items.jPostDate}
+            jDeadline={items.jDeadline}
+            jTitle={items.jTitle}
+            jDescription={items.jDescription}
+            jImage={items.jImage}
+            jCatagory={items.jCatagory}
+            jApplicants={items.jApplicants}
           />
         );
       })}

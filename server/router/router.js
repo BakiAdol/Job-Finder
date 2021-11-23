@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userSchema");
-const { PostNewJobFunction } = require("../controllers/jobController");
+const {
+  PostNewJobFunction,
+  ShowAllJobsFunction,
+  ShowMyAllJobsFunction,
+} = require("../controllers/jobController");
 const {
   registerFunction,
   loginFunction,
@@ -100,5 +104,9 @@ router.post(
 //............................. job router
 // new job post
 router.post("/postnewjob", PostNewJobFunction);
+// get all jobs
+router.get("/alljobs", ShowAllJobsFunction);
+// get my all jobs
+router.post("/myalljobs", ShowMyAllJobsFunction);
 
 module.exports = router;

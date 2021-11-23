@@ -35,7 +35,24 @@ module.exports = {
       console.log(error);
       return res.status(422).json({ error: "Server Error!" });
     }
-
-    console.log("body", jUserId, jCatagory);
+  },
+  async ShowAllJobsFunction(req, res) {
+    try {
+      const jobs = await Job.find({}).sort({ jPostDate: -1 });
+      res.send(jobs);
+    } catch (error) {
+      console.log(error);
+      return res.status(422).json({ error: "Server Error!" });
+    }
+  },
+  async ShowMyAllJobsFunction(req, res) {
+    try {
+      const { jUserId } = req.body;
+      const jobs = await Job.find({ jUserId }).sort({ jPostDate: -1 });
+      res.send(jobs);
+    } catch (error) {
+      console.log(error);
+      return res.status(422).json({ error: "Server Error!" });
+    }
   },
 };

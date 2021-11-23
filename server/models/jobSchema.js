@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const jobSchema = new mongoose.Schema({
-  jUserId: { type: String, required: true },
+  jUserId: { type: mongoose.ObjectId, required: true },
   jPostDate: { type: Date },
   jDeadline: { type: Date },
   jTitle: { type: String, required: true },
