@@ -7,6 +7,7 @@ const jobSchema = new mongoose.Schema({
   jTitle: { type: String, required: true },
   jDescription: { type: String, required: true },
   jImage: { type: String },
+  jCatagory: [{ type: String, require: true }],
   jApplicants: [{ applicantId: String, applicantCv: String }],
 });
 

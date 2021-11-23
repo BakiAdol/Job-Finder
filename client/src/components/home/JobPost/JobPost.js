@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import AuthContext from "../../../context/AuthContext";
 import CataItems from "./CataItems";
 import "./JobPost.css";
 
 export default function JobPost() {
+  const { loggedIn } = useContext(AuthContext);
   const [jobInp, setjobInp] = useState({
+    jUserId: "",
+    jDeadline: new Date(),
     jTitle: "",
     jDescription: "",
     jImage: "",
     jCatagory: CataItems,
+    jApplicants: [],
   });
 
   function updateNewState(pos, val) {
@@ -23,7 +30,7 @@ export default function JobPost() {
   const hangleInput = (event) => {
     let { name, value } = event.target;
     if (name === "jCatagory") {
-      if (value == 0) return 0;
+      if (value === 0) return 0;
       updateNewState(value, 1);
     } else setjobInp({ ...jobInp, [name]: value });
   };
@@ -32,14 +39,32 @@ export default function JobPost() {
     updateNewState(pos, 0);
   };
 
-  const submitJobPost = (e) => {
+  const submitJobPost = async (e) => {
     e.preventDefault();
+    if (loggedIn.isLoggedIn === false) {
+      return alert("Login in first!");
+    }
     let data = { ...jobInp };
     let cata = [];
     data.jCatagory.forEach((item, pos) => {
       if (item.isSelected === 1) cata.push(item.iName);
     });
+    if (cata.length === 0) return alert("Add at lest one catagory!");
     data.jCatagory = cata;
+    data.jUserId = loggedIn.rootUserId;
+    const res = await fetch("/postnewjob", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jobInp),
+    });
+
+    const jsRes = await res.json();
+    if (res.status === 422) {
+      return alert("server errror!");
+    }
+
     console.log(data);
   };
 
@@ -52,12 +77,14 @@ export default function JobPost() {
           value={jobInp.jTitle}
           placeholder="Job Title"
           onChange={hangleInput}
+          required
         />
         <textarea
           name="jDescription"
           value={jobInp.jDescription}
           placeholder="Job Description"
           onChange={hangleInput}
+          required
         />
         <div className="imgAndCataContainer">
           <div className="imgContainer">
@@ -66,6 +93,20 @@ export default function JobPost() {
               <input name="jImage" type="file" onChange={hangleInput} />
             </label>
             <img src="" alt="" />
+            <div className="datePickerContainer">
+              <h2>Deadline</h2>
+              <DatePicker
+                className="deadlinePicker"
+                dateFormat="dd/MM/yyyy"
+                selected={jobInp.jDeadline}
+                minDate={new Date()}
+                onChange={(date) => {
+                  let obj = { ...jobInp };
+                  obj.jDeadline = date;
+                  setjobInp(obj);
+                }}
+              />
+            </div>
           </div>
           <div className="cataContainer">
             <select name="jCatagory" onChange={hangleInput}>
@@ -90,7 +131,9 @@ export default function JobPost() {
           </div>
         </div>
 
-        <button type="submit">Post Job</button>
+        <button type="submit" className="jobPostBtn">
+          Post Job
+        </button>
       </form>
     </div>
   );

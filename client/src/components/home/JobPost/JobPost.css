@@ -1,5 +1,5 @@
 div.jobPost {
-  padding: 0.5rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
   background-color: var(--c-white);
 }
 div.jobPost form input[type="text"],
@@ -14,7 +14,7 @@ textarea {
 }
 
 div.jobPost form textarea {
-  height: 4rem;
+  height: 5rem;
   resize: none;
   font-family: var(--f-lato);
   border: none;
@@ -92,7 +92,15 @@ div.jobPost form label {
   color: var(--c-dark-gray);
 }
 
-div.jobPost form button {
+div.datePickerContainer {
+  margin-bottom: 0.5rem;
+}
+
+div.datePickerContainer h2 {
+  color: var(--c-dark-gray);
+}
+
+div.jobPost form button.jobPostBtn {
   width: 100%;
   border: none;
   background: var(--c-primary);
