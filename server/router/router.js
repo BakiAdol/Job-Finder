@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
+let path = require("path");
 const User = require("../models/userSchema");
 const {
   PostNewJobFunction,
@@ -42,7 +45,6 @@ router.post("/profileupdate/experiences", updateExperiencesFunction);
 router.post("/profileupdate/projects", updateProjectsFunction);
 
 // upload cv
-const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -102,8 +104,29 @@ router.post(
 );
 
 //............................. job router
+const jobImageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "Images//JobImage");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const jobImageFilter = (req, file, cb) => {
+  const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+let jobImageUpload = multer({
+  storage: jobImageStorage,
+  fileFilter: jobImageFilter,
+});
 // new job post
-router.post("/postnewjob", PostNewJobFunction);
+router.post("/postnewjob", jobImageUpload.single("jImage"), PostNewJobFunction);
 // get all jobs
 router.get("/alljobs", ShowAllJobsFunction);
 // get my all jobs

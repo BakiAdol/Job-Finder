@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 import UserContext from "../../context/UserContext";
 import Applie from "./Applie/Applie";
 import Bio from "./Bio/Bio";
@@ -10,6 +11,7 @@ import profileLinkItem from "./profileLinkItem";
 import Projects from "./Projects/Projects";
 
 export default function Profile(props) {
+  const { loggedIn } = useContext(AuthContext);
   const uId = props.match.params.userId;
   const currentUrl = props.match.url;
 
@@ -40,7 +42,9 @@ export default function Profile(props) {
         <div className="profileRightBody">
           <div className="profileLinks">
             {profileLinkItem.map((item, pos) => {
-              return (
+              return loggedIn.rootUserId === uId ||
+                item.linkName === "Projects" ||
+                item.linkName === "Experiences" ? (
                 <Link
                   className="linkItem"
                   key={pos}
@@ -48,6 +52,8 @@ export default function Profile(props) {
                 >
                   {item.linkName}
                 </Link>
+              ) : (
+                ""
               );
             })}
           </div>
@@ -61,8 +67,13 @@ export default function Profile(props) {
               path={"/profile/:userId/experiences"}
               render={() => <Experiences {...props} userId={uId} />}
             />
-            <Route path="/profile/:userId/jobs" component={Jobs} />
-            <Route path="/profile/:userId/applies" component={Applie} />
+
+            {loggedIn.rootUserId === uId && (
+              <>
+                <Route path="/profile/:userId/jobs" component={Jobs} />
+                <Route path="/profile/:userId/applies" component={Applie} />
+              </>
+            )}
           </Switch>
         </div>
       </div>

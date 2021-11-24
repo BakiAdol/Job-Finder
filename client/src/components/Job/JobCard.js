@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
 import "./JobCard.css";
 
 export default function JobCard(props) {
+  const { loggedIn } = useContext(AuthContext);
   function DMYconvert(strDate) {
     return (
       strDate.getDate() + "-" + strDate.getMonth() + "-" + strDate.getFullYear()
@@ -15,6 +17,12 @@ export default function JobCard(props) {
       <div className="jobCardHeader">
         <div className="userNameShow">
           <Link to="#">{props.jUserName}</Link>
+          {props.jDeadline > new Date() ||
+          loggedIn.rootUserId === props.jUserId ? (
+            ""
+          ) : (
+            <button className="primaryButton">Apply Now</button>
+          )}
         </div>
 
         <div className="dateShow">

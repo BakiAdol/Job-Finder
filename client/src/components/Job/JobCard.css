@@ -19,7 +19,9 @@ div.jobCard a {
 }
 
 div.jobCard div.userNameShow {
-  padding: 0.3rem 0 0 0.5rem;
+  padding: 0.3rem 0.5rem 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 div.jobCard div.dateShow {

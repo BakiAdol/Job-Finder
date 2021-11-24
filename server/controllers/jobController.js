@@ -3,18 +3,13 @@ require("../db/dbconn");
 
 module.exports = {
   async PostNewJobFunction(req, res) {
-    const {
-      jUserId,
-      jDeadline,
-      jTitle,
-      jDescription,
-      jImage,
-      jCatagory,
-      jApplicants,
-    } = req.body;
-    const jPostDate = new Date();
+    const { jUserId, jDeadline, jTitle, jDescription, jCatagory, jApplicants } =
+      req.body;
 
-    if (!jUserId || !jTitle || !jDescription || !jCatagory) {
+    const jPostDate = new Date();
+    const jImage = req.file.path;
+
+    if (!jUserId || !jTitle || !jDescription || !jCatagory || !jImage) {
       return res.status(422).json({ error: "Fill all fields!" });
     }
 
@@ -29,6 +24,7 @@ module.exports = {
         jApplicants,
         jPostDate,
       });
+      console.log("aichheee", newJob);
       await newJob.save();
       res.status(201).json({ msg: "Job Post successful!" });
     } catch (error) {

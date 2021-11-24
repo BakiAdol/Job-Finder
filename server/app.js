@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -12,6 +13,7 @@ require("./db/dbconn");
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 // link router file
 app.use(require("./router/router"));

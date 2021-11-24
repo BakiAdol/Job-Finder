@@ -50,29 +50,34 @@ export default function JobPost() {
       if (item.isSelected === 1) cata.push(item.iName);
     });
     if (cata.length === 0) return alert("Add at lest one catagory!");
-    data.jCatagory = cata;
-    data.jUserId = loggedIn.rootUserId;
-    const res = await fetch("/postnewjob", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
 
-    const jsRes = await res.json();
-    if (res.status === 422) {
-      return alert("server errror!");
-    }
-    alert("Job Post Successfull!");
-    setjobInp({
-      jUserId: "",
-      jDeadline: new Date(),
-      jTitle: "",
-      jDescription: "",
-      jImage: "",
-      jCatagory: CataItems,
-      jApplicants: [],
+    const formData = new FormData();
+    formData.append("jUserId", loggedIn.rootUserId);
+    formData.append("jDeadline", jobInp.jDeadline);
+    formData.append("jTitle", jobInp.jTitle);
+    formData.append("jDescription", jobInp.jDescription);
+    formData.append("jImage", jobInp.jImage);
+    formData.append("jCatagory", JSON.stringify(cata));
+    formData.append("jApplicants", jobInp.jApplicants);
+
+    fetch("/postnewjob", {
+      method: "POST",
+      body: formData,
+    }).then((res) => {
+      if (res.status === 422) {
+        return alert("server errror!");
+      }
+      alert("Job Post Successfull!");
+      setjobInp({
+        jUserId: "",
+        jDeadline: new Date(),
+        jTitle: "",
+        jDescription: "",
+        jImage: "",
+        jCatagory: CataItems,
+        jApplicants: [],
+      });
+      // return response.blob();
     });
   };
 
@@ -98,7 +103,13 @@ export default function JobPost() {
           <div className="imgContainer">
             <label>
               Upload Image
-              <input name="jImage" type="file" onChange={hangleInput} />
+              <input
+                name="jImage"
+                type="file"
+                onChange={(e) => {
+                  setjobInp({ ...jobInp, jImage: e.target.files[0] });
+                }}
+              />
             </label>
             <img src="" alt="" />
             <div className="datePickerContainer">
