@@ -7,7 +7,7 @@ module.exports = {
       req.body;
 
     const jPostDate = new Date();
-    const jImage = req.file.path;
+    const jImage = req.file.filename;
 
     if (!jUserId || !jTitle || !jDescription || !jCatagory || !jImage) {
       return res.status(422).json({ error: "Fill all fields!" });
@@ -24,7 +24,6 @@ module.exports = {
         jApplicants,
         jPostDate,
       });
-      console.log("aichheee", newJob);
       await newJob.save();
       res.status(201).json({ msg: "Job Post successful!" });
     } catch (error) {

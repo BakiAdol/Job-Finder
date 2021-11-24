@@ -29,7 +29,7 @@ export default function Profile(props) {
   return (
     <div className="profileContainer minHeight80vh">
       <div className="profileHeader">
-        <img src={require("../../images/me.jpg").default} alt="" />
+        <img src="/images/profilepic/me.jpg" alt="" />
         <div className="nameEmail">
           <p>{userInfo.uName}</p>
           <p>{userInfo.uEmail}</p>

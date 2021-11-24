@@ -45,7 +45,11 @@ export default function JobCard(props) {
 
       <h2 className="titleShow">{props.jTitle}</h2>
       <p className="desShow">{props.jDescription}</p>
-      {props.jImage !== "" ? <img src={props.jImage} alt="" /> : ""}
+      {props.jImage !== "" ? (
+        <img src={`/images/jobimages/${props.jImage}`} alt="" />
+      ) : (
+        ""
+      )}
       <div className="jobCata">
         {props.jCatagory.map((items, pos) => {
           return (
