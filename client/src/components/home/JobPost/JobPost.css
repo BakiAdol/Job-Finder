@@ -34,6 +34,10 @@ div.jobPost form div.imgAndCataContainer div.imgContainer {
   margin-right: 0.25rem;
 }
 
+div.jobPost form div.imgAndCataContainer div.imgContainer img {
+  width: 100%;
+}
+
 div.jobPost form div.imgAndCataContainer div.cataContainer {
   width: 50%;
   margin-left: 0.25rem;

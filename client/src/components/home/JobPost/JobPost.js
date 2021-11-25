@@ -6,6 +6,7 @@ import CataItems from "./CataItems";
 import "./JobPost.css";
 
 export default function JobPost() {
+  const [jobImage, setjobImage] = useState(undefined);
   const { loggedIn } = useContext(AuthContext);
   const [jobInp, setjobInp] = useState({
     jUserId: "",
@@ -45,9 +46,12 @@ export default function JobPost() {
       return alert("Login in first!");
     }
     let data = { ...jobInp };
-    let cata = [];
+    let cata = "";
     data.jCatagory.forEach((item, pos) => {
-      if (item.isSelected === 1) cata.push(item.iName);
+      if (item.isSelected === 1) {
+        if (cata !== "") cata += ",";
+        cata += item.iName;
+      }
     });
     if (cata.length === 0) return alert("Add at lest one catagory!");
 
@@ -57,7 +61,7 @@ export default function JobPost() {
     formData.append("jTitle", jobInp.jTitle);
     formData.append("jDescription", jobInp.jDescription);
     formData.append("jImage", jobInp.jImage);
-    formData.append("jCatagory", JSON.stringify(cata));
+    formData.append("jCatagory", cata);
     formData.append("jApplicants", jobInp.jApplicants);
 
     fetch("/postnewjob", {
@@ -108,10 +112,25 @@ export default function JobPost() {
                 type="file"
                 onChange={(e) => {
                   setjobInp({ ...jobInp, jImage: e.target.files[0] });
+                  const imgurl = URL.createObjectURL(e.target.files[0]);
+                  setjobImage(imgurl);
                 }}
               />
             </label>
-            <img src="" alt="" />
+            {jobInp.jImage === undefined ? (
+              ""
+            ) : (
+              <div>
+                <img src={jobImage} alt="" />
+                <p
+                  onClick={() => {
+                    setjobImage(undefined);
+                  }}
+                >
+                  Cancel
+                </p>
+              </div>
+            )}
             <div className="datePickerContainer">
               <h2>Deadline</h2>
               <DatePicker

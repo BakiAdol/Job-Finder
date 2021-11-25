@@ -24,6 +24,7 @@ export default function Register() {
   const submitRegData = async (e) => {
     e.preventDefault();
     const { uName, uEmail, uPassword, uConfirmPassword, uGender } = regData;
+    const uPropic = "blnkpropic.gif";
     const res = await fetch("/register", {
       method: "POST",
       headers: {
@@ -31,6 +32,7 @@ export default function Register() {
       },
       body: JSON.stringify({
         uName,
+        uPropic,
         uEmail,
         uPassword,
         uConfirmPassword,

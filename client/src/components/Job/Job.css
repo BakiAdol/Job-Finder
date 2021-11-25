@@ -1,4 +1,5 @@
 div.jobBody div.jobCards {
   width: 40%;
+  min-width: 25rem;
   margin: 1rem auto;
 }

@@ -6,7 +6,8 @@ require("../db/dbconn");
 
 module.exports = {
   async registerFunction(req, res) {
-    const { uName, uEmail, uPassword, uConfirmPassword, uGender } = req.body;
+    const { uName, uPropic, uEmail, uPassword, uConfirmPassword, uGender } =
+      req.body;
 
     if (!uName || !uEmail || !uPassword || !uConfirmPassword) {
       return res.status(422).json({ error: "Fill all fields!" });
@@ -23,7 +24,13 @@ module.exports = {
 
       const salt = await bcrypt.genSalt((saltRounds = 10));
       const hasPass = await bcrypt.hash(uPassword, salt);
-      const newUser = new User({ uName, uEmail, uPassword: hasPass, uGender });
+      const newUser = new User({
+        uName,
+        uPropic,
+        uEmail,
+        uPassword: hasPass,
+        uGender,
+      });
 
       await newUser.save();
       let token = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY);

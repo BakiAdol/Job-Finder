@@ -130,7 +130,7 @@ export default function Projects(props) {
           </div>
           <div className="addCancleEditProItems">
             <button className="primaryButton" onClick={updateProjects}>
-              Save Experiences
+              Save Projects
             </button>
             <button
               className="primaryButton"

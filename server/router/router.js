@@ -103,10 +103,9 @@ router.post(
   }
 );
 
-//............................. job router
+//............................. job router..........................
 const jobImageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // cb(null, "Images//JobImage");
     cb(null, "../client//public//images//jobimages");
   },
   filename: function (req, file, cb) {

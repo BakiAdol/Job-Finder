@@ -16,7 +16,7 @@ export default function JobCard(props) {
     <div className="jobCard">
       <div className="jobCardHeader">
         <div className="userNameShow">
-          <Link to="#">{props.jUserName}</Link>
+          <Link to={`/profile/${props.jUserId}`}>{props.jUserName}</Link>
           {props.jDeadline > new Date() ||
           loggedIn.rootUserId === props.jUserId ? (
             ""
