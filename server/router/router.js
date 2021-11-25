@@ -130,7 +130,7 @@ let jobImageUpload = multer({
 // new job post
 router.post("/postnewjob", jobImageUpload.single("jImage"), PostNewJobFunction);
 // get all jobs
-router.get("/alljobs", ShowAllJobsFunction);
+router.post("/alljobs", ShowAllJobsFunction);
 // get my all jobs
 router.post("/myalljobs", ShowMyAllJobsFunction);
 

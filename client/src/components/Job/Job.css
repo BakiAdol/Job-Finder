@@ -1,5 +1,74 @@
+div.jobBody {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  margin-top: 1rem;
+}
 div.jobBody div.jobCards {
   width: 40%;
   min-width: 25rem;
-  margin: 1rem auto;
+  margin-right: 10%;
+}
+
+.jobSearchBody {
+  width: 12rem;
+}
+.jobSearchBody h3 {
+  font-size: 1.2rem;
+  text-align: center;
+  padding-bottom: 0.2rem;
+  font-weight: 600;
+  color: var(--c-primary);
+}
+div.cataContainer select {
+  text-align: center;
+  width: 100%;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  color: var(--c-dark-gray);
+  padding: 0.3rem;
+  font-size: 1rem;
+  margin: 0;
+  outline: none;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+}
+
+div.cataContainer button {
+  margin: 0.5rem 0 1rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+div.selectCataShow {
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem;
+  background-color: var(--c-white);
+  margin-top: 0.5rem;
+}
+div.selectCataShow p {
+  color: var(--c-dark-gray);
+  font-size: 1rem;
+  font-weight: 600;
+}
+div.selectCataShow span {
+  color: red;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+  div.jobBody {
+    flex-direction: column;
+    align-items: center;
+  }
+  div.jobBody div.jobCards {
+    width: 70%;
+    margin: 0;
+  }
 }

@@ -37,7 +37,8 @@ export default function JobCard(props) {
         <div className="userNameShow">
           <Link to={`/profile/${props.jUserId}`}>{props.jUserName}</Link>
           {props.jDeadline > new Date() ||
-          loggedIn.rootUserId === props.jUserId ? (
+          loggedIn.rootUserId === props.jUserId ||
+          props.alreadyApplie ? (
             ""
           ) : (
             <button className="primaryButton" onClick={applyForJob}>

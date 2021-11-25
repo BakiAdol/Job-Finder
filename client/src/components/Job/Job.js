@@ -1,19 +1,73 @@
 import React, { useEffect, useState } from "react";
+import CataItems from "../Home/JobPost/CataItems";
 import "./Job.css";
 import JobCard from "./JobCard";
 
 export default function Job() {
   const [jobs, setjobs] = useState([]);
-  useEffect(() => {
+  const [jobCata, setjobCata] = useState([]);
+
+  const getAllJobs = () => {
     const headers = { "Content-Type": "application/json" };
-    fetch("/alljobs", { headers })
+    fetch("/alljobs", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ jobCata }),
+    })
       .then((response) => response.json())
       .then((data) => {
         setjobs(data);
       });
+  };
+
+  useEffect(() => {
+    getAllJobs();
   }, []);
+
+  const addCatagorites = (e) => {
+    let { value } = e.target;
+    if (value !== "Catagory" && jobCata.includes(value) === false) {
+      setjobCata((arr) => [...arr, value]);
+    }
+  };
+
+  const removeCatagorites = (val) => {
+    setjobCata(
+      [...jobCata].filter(function (item) {
+        return item !== val;
+      })
+    );
+  };
+
   return (
     <div className="jobBody minHeight80vh">
+      <div className="jobSearchBody">
+        <h3>Search Jobs</h3>
+        <div className="cataContainer">
+          <select name="jCatagory" onChange={addCatagorites}>
+            {CataItems.map((items, pos) => {
+              return (
+                <option key={pos} value={items.iName}>
+                  {items.iName}
+                </option>
+              );
+            })}
+          </select>
+
+          {jobCata.map((items, pos) => {
+            return (
+              <div className="selectCataShow" key={pos}>
+                <p>{items}</p>
+                <span onClick={() => removeCatagorites(items)}>X</span>
+              </div>
+            );
+          })}
+
+          <button className="primaryButton" onClick={() => getAllJobs()}>
+            Search
+          </button>
+        </div>
+      </div>
       <div className="jobCards">
         {jobs.map((items, pos) => {
           return (

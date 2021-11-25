@@ -29,7 +29,11 @@ export default function Profile(props) {
   return (
     <div className="profileContainer minHeight80vh">
       <div className="profileHeader">
-        <img src={`/images/profilepic/${userInfo.uPropic}`} alt="" />
+        <div className="propic">
+          <img src={`/images/profilepic/${userInfo.uPropic}`} alt="" />
+          <button>Update</button>
+        </div>
+
         <div className="nameEmail">
           <p>{userInfo.uName}</p>
           <p>{userInfo.uEmail}</p>

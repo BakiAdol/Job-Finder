@@ -27,6 +27,7 @@ export default function Applie(props) {
           <JobCard
             key={pos}
             className="JobCard"
+            alreadyApplie={true}
             jUserId={items.jUserId}
             jUserName="User Name"
             jPostDate={items.jPostDate}

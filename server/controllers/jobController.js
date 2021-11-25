@@ -40,7 +40,11 @@ module.exports = {
   },
   async ShowAllJobsFunction(req, res) {
     try {
-      const jobs = await Job.find({})
+      const { jobCata } = req.body;
+
+      const jobs = await Job.find(
+        jobCata.length === 0 ? {} : { jCatagory: { $in: [...jobCata] } }
+      )
         .populate("jUserId", "uName")
         .sort({ jPostDate: -1 });
 
