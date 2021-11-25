@@ -20,6 +20,7 @@ export default function Job() {
             <JobCard
               key={pos}
               className="JobCard"
+              jPostId={items._id}
               jUserId={items.jUserId._id}
               jUserName={items.jUserId.uName}
               jPostDate={items.jPostDate}

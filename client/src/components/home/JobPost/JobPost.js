@@ -117,7 +117,7 @@ export default function JobPost() {
                 }}
               />
             </label>
-            {jobInp.jImage === undefined ? (
+            {jobImage === undefined ? (
               ""
             ) : (
               <div>
@@ -125,6 +125,7 @@ export default function JobPost() {
                 <p
                   onClick={() => {
                     setjobImage(undefined);
+                    setjobInp({ ...jobInp, jImage: "" });
                   }}
                 >
                   Cancel

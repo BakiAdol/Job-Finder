@@ -8,6 +8,8 @@ const {
   PostNewJobFunction,
   ShowAllJobsFunction,
   ShowMyAllJobsFunction,
+  ApplieForJobFunction,
+  ShowMyAllApplieJobFunction,
 } = require("../controllers/jobController");
 const {
   registerFunction,
@@ -131,5 +133,11 @@ router.post("/postnewjob", jobImageUpload.single("jImage"), PostNewJobFunction);
 router.get("/alljobs", ShowAllJobsFunction);
 // get my all jobs
 router.post("/myalljobs", ShowMyAllJobsFunction);
+
+// get my all applie job
+router.post("/myallappliejob", ShowMyAllApplieJobFunction);
+
+// apply for job
+router.post("/appliforjob", ApplieForJobFunction);
 
 module.exports = router;

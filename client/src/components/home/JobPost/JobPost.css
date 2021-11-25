@@ -38,6 +38,15 @@ div.jobPost form div.imgAndCataContainer div.imgContainer img {
   width: 100%;
 }
 
+div.jobPost form div.imgAndCataContainer div.imgContainer p {
+  font-size: 1rem;
+  color: var(--c-error);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.2rem 0 0.2rem;
+}
+
 div.jobPost form div.imgAndCataContainer div.cataContainer {
   width: 50%;
   margin-left: 0.25rem;

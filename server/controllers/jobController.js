@@ -68,4 +68,40 @@ module.exports = {
       return res.status(422).json({ error: "Server Error!" });
     }
   },
+  async ShowMyAllApplieJobFunction(req, res) {
+    try {
+      const { uApplieJobs } = req.body;
+      const jobs = await Job.find({ _id: { $in: [...uApplieJobs] } }).sort({
+        jPostDate: -1,
+      });
+      res.send(jobs);
+    } catch (error) {
+      console.log(error);
+      return res.status(422).json({ error: "Server Error!" });
+    }
+  },
+  async ApplieForJobFunction(req, res) {
+    try {
+      const { userId, jobId } = req.body;
+      const alreadyAppli = await User.findOne({
+        _id: userId,
+        uJobApplies: { $in: [jobId] },
+      });
+
+      if (alreadyAppli) {
+        return res.status(422).json({ msg: "You Already Applied!" });
+      }
+      const updateAppli = await User.updateOne(
+        { _id: userId },
+        {
+          $push: {
+            uJobApplies: jobId,
+          },
+        }
+      );
+      res.status(200).json({ msg: "Applie successful!" });
+    } catch (err) {
+      return res.status(422).json({ msg: "Server error!" });
+    }
+  },
 };

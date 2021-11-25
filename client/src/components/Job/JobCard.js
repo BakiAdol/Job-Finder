@@ -12,6 +12,25 @@ export default function JobCard(props) {
   }
   const postDate = DMYconvert(new Date(props.jPostDate));
   const postDeadline = DMYconvert(new Date(props.jDeadline));
+
+  const applyForJob = async () => {
+    if (loggedIn.isLoggedIn === false) {
+      return alert("Login in first");
+    }
+    const res = await fetch("/appliforjob", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: loggedIn.rootUserId,
+        jobId: props.jPostId,
+      }),
+    });
+    const data = await res.json();
+    alert(data.msg);
+  };
+
   return (
     <div className="jobCard">
       <div className="jobCardHeader">
@@ -21,7 +40,9 @@ export default function JobCard(props) {
           loggedIn.rootUserId === props.jUserId ? (
             ""
           ) : (
-            <button className="primaryButton">Apply Now</button>
+            <button className="primaryButton" onClick={applyForJob}>
+              Apply Now
+            </button>
           )}
         </div>
 
