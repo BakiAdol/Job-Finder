@@ -5,6 +5,7 @@ div.profileContainer {
 }
 
 div.profileContainer div.profileHeader {
+  position: relative;
   display: flex;
   margin-bottom: 0.5rem;
   padding: 0.5rem;

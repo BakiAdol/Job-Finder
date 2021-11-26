@@ -1,0 +1,43 @@
+div.updatePropiContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15rem;
+  height: 15rem;
+  background-color: var(--c-white);
+}
+
+div.updatePropiContainer div.upPropicbody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+div.updatePropiContainer div.upPropicbody div.proimgBody {
+  width: 11rem;
+  height: 11rem;
+}
+div.updatePropiContainer div.upPropicbody img {
+  width: 11rem;
+  height: 11rem;
+  padding: 0.5rem;
+}
+
+div.updatePropiContainer input {
+  display: none;
+}
+div.updatePropiContainer label {
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  background-color: var(--c-primary);
+  color: var(--c-white);
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem 0.4rem 0.5rem;
+}
+
+div.updatePropiContainer div.saveCancle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

@@ -21,7 +21,37 @@ const {
   updateExperiencesFunction,
   updateProjectsFunction,
   searchUsersFunction,
+  updateUserProfilePicFunction,
 } = require("../controllers/authControllers");
+
+// ..............image uploda functions.................
+const imageFilter = (req, file, cb) => {
+  const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
+  if (allowedFileTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const jobImageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client//public//images//jobimages");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const profileImageStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client//public//images//profilepic");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+//............................................
 
 // register
 router.post("/register", registerFunction);
@@ -38,6 +68,7 @@ router.get("/loggedin", loggendInFunction);
 // get user
 router.post("/user/userdata", getUserFunction);
 
+//.....................................update routers.........................
 // update user bio
 router.post("/profileupdate/bio", updaetBioFunction);
 
@@ -46,6 +77,17 @@ router.post("/profileupdate/experiences", updateExperiencesFunction);
 
 // update user profects
 router.post("/profileupdate/projects", updateProjectsFunction);
+
+// update user profile picture
+const profileImageUpload = multer({
+  storage: profileImageStorage,
+  fileFilter: imageFilter,
+});
+router.post(
+  "/profileupdate/profilepic",
+  profileImageUpload.single("uPropic"),
+  updateUserProfilePicFunction
+);
 
 // upload cv
 
@@ -107,26 +149,10 @@ router.post(
 );
 
 //............................. job router..........................
-const jobImageStorage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client//public//images//jobimages");
-  },
-  filename: function (req, file, cb) {
-    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
-  },
-});
 
-const jobImageFilter = (req, file, cb) => {
-  const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
-  if (allowedFileTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-let jobImageUpload = multer({
+const jobImageUpload = multer({
   storage: jobImageStorage,
-  fileFilter: jobImageFilter,
+  fileFilter: imageFilter,
 });
 // new job post
 router.post("/postnewjob", jobImageUpload.single("jImage"), PostNewJobFunction);

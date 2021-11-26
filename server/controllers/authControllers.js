@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/userSchema");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
 
 require("../db/dbconn");
 
@@ -149,6 +150,32 @@ module.exports = {
         {
           $set: {
             uProjects,
+          },
+        }
+      );
+      res.json({ success: "Update successful!" });
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
+    }
+  },
+
+  async updateUserProfilePicFunction(req, res) {
+    try {
+      const { _id } = req.body;
+      const uPropic = req.file.filename;
+      const previousPro = await User.findOne({ _id }, { uPropic: 1 });
+      console.log("aiche");
+      if (previousPro.uPropic !== "blnkpropic.gif") {
+        const imagePath = `../client//public//images//profilepic//${previousPro.uPropic}`;
+        console.log(imagePath);
+        fs.unlinkSync(imagePath);
+      }
+
+      const updatePro = await User.updateOne(
+        { _id },
+        {
+          $set: {
+            uPropic,
           },
         }
       );

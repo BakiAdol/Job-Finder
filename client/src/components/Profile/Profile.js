@@ -9,6 +9,7 @@ import Jobs from "./Jobs";
 import "./Profile.css";
 import profileLinkItem from "./profileLinkItem";
 import Projects from "./Projects/Projects";
+import UpdateProPic from "./UpdateProPic/UpdateProPic";
 
 export default function Profile(props) {
   const { loggedIn } = useContext(AuthContext);
@@ -17,6 +18,8 @@ export default function Profile(props) {
 
   const { userInfo, getUserDetails } = useContext(UserContext);
   const [dataLoading, setDataLoading] = useState(true);
+
+  const [updatePropic, setupdatePropic] = useState(false);
 
   useEffect(() => {
     async function fetchUserInfo(userId) {
@@ -30,8 +33,26 @@ export default function Profile(props) {
     <div className="profileContainer minHeight80vh">
       <div className="profileHeader">
         <div className="propic">
+          {updatePropic ? (
+            <UpdateProPic
+              rootUserId={loggedIn.rootUserId}
+              setupdatePropic={setupdatePropic}
+            />
+          ) : (
+            ""
+          )}
+
           <img src={`/images/profilepic/${userInfo.uPropic}`} alt="" />
-          <button>Update</button>
+          {loggedIn.rootUserId === uId ? (
+            <button
+              className="primaryButton"
+              onClick={() => setupdatePropic(true)}
+            >
+              Update
+            </button>
+          ) : (
+            ""
+          )}
         </div>
 
         <div className="nameEmail">
