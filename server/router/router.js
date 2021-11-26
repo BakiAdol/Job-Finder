@@ -20,6 +20,7 @@ const {
   updaetBioFunction,
   updateExperiencesFunction,
   updateProjectsFunction,
+  searchUsersFunction,
 } = require("../controllers/authControllers");
 
 // register
@@ -139,5 +140,8 @@ router.post("/myallappliejob", ShowMyAllApplieJobFunction);
 
 // apply for job
 router.post("/appliforjob", ApplieForJobFunction);
+
+//....................... user searching router...................
+router.post("/searchuser", searchUsersFunction);
 
 module.exports = router;

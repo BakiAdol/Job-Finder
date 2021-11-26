@@ -1,11 +1,36 @@
-.jobPostContainer {
-  width: 35%;
-  min-width: 25rem;
+div.homebody {
   margin: 1rem auto;
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  justify-content: space-between;
 }
-
-@media only screen and (max-width: 500px) {
-  .jobPostContainer {
+.searchUserContainer {
+  width: 35%;
+}
+.jobPostContainer {
+  width: 60%;
+}
+@media only screen and (max-width: 1200px) {
+  div.homebody {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 900px) {
+  div.homebody {
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 650px) {
+  div.homebody {
     width: 95%;
+    flex-direction: column;
+    min-height: auto;
+  }
+  .searchUserContainer {
+    width: 100%;
+  }
+  .jobPostContainer {
+    width: 100%;
   }
 }

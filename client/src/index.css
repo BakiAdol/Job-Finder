@@ -48,3 +48,6 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
+input:focus {
+  outline: none;
+}

@@ -157,4 +157,19 @@ module.exports = {
       return res.status(422).json({ error: "Server error!" });
     }
   },
+
+  async searchUsersFunction(req, res) {
+    try {
+      const { inputName } = req.body;
+      const user = await User.find(
+        {
+          uName: { $regex: inputName, $options: "i" },
+        },
+        { uName: 1 }
+      );
+      res.send(user);
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
+    }
+  },
 };
