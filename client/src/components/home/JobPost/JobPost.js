@@ -14,30 +14,30 @@ export default function JobPost() {
     jTitle: "",
     jDescription: "",
     jImage: "",
-    jCatagory: CataItems,
+    jCatagory: [],
     jApplicants: [],
   });
 
-  function updateNewState(pos, val) {
-    let obj = { ...jobInp };
-    let items = [...obj.jCatagory];
-    let item = { ...items[pos] };
-    item.isSelected = val;
-    items[pos] = item;
-    obj.jCatagory = items;
-    setjobInp(obj);
-  }
-
   const hangleInput = (event) => {
     let { name, value } = event.target;
+
     if (name === "jCatagory") {
-      if (value === 0) return 0;
-      updateNewState(value, 1);
+      const obj = { ...jobInp };
+      const cata = [...obj.jCatagory];
+      if (value !== "Catagory" && cata.includes(value) === false) {
+        cata.push(value);
+        setjobInp({ ...jobInp, jCatagory: cata });
+      }
     } else setjobInp({ ...jobInp, [name]: value });
   };
 
-  const removeCata = (pos) => {
-    updateNewState(pos, 0);
+  const removeCata = (val) => {
+    const obj = { ...jobInp };
+    let cata = [...obj.jCatagory];
+    cata = cata.filter(function (item) {
+      return item !== val;
+    });
+    setjobInp({ ...jobInp, jCatagory: cata });
   };
 
   const submitJobPost = async (e) => {
@@ -151,19 +151,18 @@ export default function JobPost() {
             <select name="jCatagory" onChange={hangleInput}>
               {CataItems.map((items, pos) => {
                 return (
-                  <option key={pos} value={pos}>
-                    {items.iName}
+                  <option key={pos} value={items}>
+                    {items}
                   </option>
                 );
               })}
             </select>
 
             {jobInp.jCatagory.map((items, pos) => {
-              if (items.isSelected !== 1) return "";
               return (
                 <div className="selectedItemShow" key={pos}>
-                  <p>{items.iName}</p>
-                  <span onClick={() => removeCata(pos)}>X</span>
+                  <p>{items}</p>
+                  <span onClick={() => removeCata(items)}>X</span>
                 </div>
               );
             })}

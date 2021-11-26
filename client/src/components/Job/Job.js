@@ -47,8 +47,8 @@ export default function Job() {
           <select name="jCatagory" onChange={addCatagorites}>
             {CataItems.map((items, pos) => {
               return (
-                <option key={pos} value={items.iName}>
-                  {items.iName}
+                <option key={pos} value={items}>
+                  {items}
                 </option>
               );
             })}
