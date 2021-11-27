@@ -14,6 +14,8 @@ export default function SearchUser() {
       return alert("Login First!");
     }
 
+    if (inputName === "") return;
+
     const res = await fetch("/searchuser", {
       method: "POST",
       headers: {
@@ -34,7 +36,10 @@ export default function SearchUser() {
           name="username"
           value={inputName}
           placeholder="Search User"
-          onChange={(e) => setinputName(e.target.value)}
+          onChange={(e) => {
+            setinputName(e.target.value);
+            setsearchUser([]);
+          }}
         />
         <button onClick={searchUserButton}>Search</button>
       </form>
@@ -47,7 +52,7 @@ export default function SearchUser() {
         {searchUser.map((item, pos) => {
           return (
             <div key={pos} className="searchUser">
-              <img src="/images/profilepic/blnkpropic.gif" alt="" />
+              <img src={`/images/profilepic/${item.uPropic}`} alt="" />
               <Link to={`/profile/${item._id}`} className="searchUserName">
                 {item.uName}
               </Link>

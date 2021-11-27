@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
+import JobApply from "./JobApply/JobApply";
 import "./JobCard.css";
 
 export default function JobCard(props) {
+  const [isApply, setisApply] = useState(false);
   const { loggedIn } = useContext(AuthContext);
   function DMYconvert(strDate) {
     return (
@@ -41,9 +43,12 @@ export default function JobCard(props) {
           props.alreadyApplie ? (
             ""
           ) : (
-            <button className="primaryButton" onClick={applyForJob}>
+            <button className="primaryButton" onClick={() => setisApply(true)}>
               Apply Now
             </button>
+          )}
+          {isApply && (
+            <JobApply setisApply={setisApply} jobId={props.jPostId} />
           )}
         </div>
 

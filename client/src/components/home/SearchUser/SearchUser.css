@@ -38,6 +38,9 @@ div.searchUser {
 }
 div.searchUser img {
   width: 2rem;
+  height: 2rem;
+  object-fit: cover;
+  object-position: 0% 0%;
   border-radius: 50%;
 }
 div.searchUser .searchUserName {
