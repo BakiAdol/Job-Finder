@@ -28,8 +28,8 @@ export default function Applie(props) {
             key={pos}
             className="JobCard"
             alreadyApplie={true}
-            jUserId={items.jUserId}
-            jUserName="User Name"
+            jUserId={items.jUserId._id}
+            jUserName={items.jUserId.uName}
             jPostDate={items.jPostDate}
             jDeadline={items.jDeadline}
             jTitle={items.jTitle}

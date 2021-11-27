@@ -7,6 +7,7 @@ require("../db/dbconn");
 module.exports = {
   async PostNewJobFunction(req, res) {
     let { jUserId, jDeadline, jTitle, jDescription, jCatagory } = req.body;
+    jCatagory = jCatagory.split(",");
 
     const jPostDate = new Date();
     let jImage;
@@ -62,7 +63,9 @@ module.exports = {
   async ShowMyAllJobsFunction(req, res) {
     try {
       const { jUserId } = req.body;
-      const jobs = await Job.find({ jUserId }).sort({ jPostDate: -1 });
+      const jobs = await Job.find({ jUserId })
+        .populate("jUserId", "uName")
+        .sort({ jPostDate: -1 });
       res.send(jobs);
     } catch (error) {
       console.log(error);
@@ -72,9 +75,11 @@ module.exports = {
   async ShowMyAllApplieJobFunction(req, res) {
     try {
       const { uApplieJobs } = req.body;
-      const jobs = await Job.find({ _id: { $in: [...uApplieJobs] } }).sort({
-        jPostDate: -1,
-      });
+      const jobs = await Job.find({ _id: { $in: [...uApplieJobs] } })
+        .populate("jUserId", "uName") // pri foreign jUserId, and get uName
+        .sort({
+          jPostDate: -1,
+        });
       res.send(jobs);
     } catch (error) {
       console.log(error);
@@ -114,6 +119,20 @@ module.exports = {
       res.status(200).json({ msg: "Applie successful!" });
     } catch (err) {
       return res.status(422).json({ msg: "Server error!" });
+    }
+  },
+  async getThisJobFunction(req, res) {
+    try {
+      const { jUserId, jobId } = req.body;
+
+      const job = await Job.findOne({ _id: jobId }).populate(
+        "jUserId",
+        "uName"
+      );
+      res.send(job);
+    } catch (error) {
+      console.log(error);
+      return res.status(422).json({ error: "Server Error!" });
     }
   },
 };

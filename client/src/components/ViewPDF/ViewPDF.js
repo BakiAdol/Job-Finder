@@ -9,7 +9,6 @@ import React from "react";
 import "./ViewPDF.css";
 
 export default function ViewPDF({ cvUrl, exitViewPdf }) {
-  console.log(cvUrl);
   // Create new plugin instance
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
@@ -22,10 +21,7 @@ export default function ViewPDF({ cvUrl, exitViewPdf }) {
       </div>
       <div className="pdfBody">
         <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
-          <Viewer
-            fileUrl={`/files/usercv/${cvUrl}`}
-            plugins={[defaultLayoutPluginInstance]}
-          />
+          <Viewer fileUrl={cvUrl} plugins={[defaultLayoutPluginInstance]} />
         </Worker>
       </div>
     </div>

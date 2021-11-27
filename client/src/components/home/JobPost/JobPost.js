@@ -54,7 +54,7 @@ export default function JobPost() {
     formData.append("jTitle", jobInp.jTitle);
     formData.append("jDescription", jobInp.jDescription);
     formData.append("jImage", jobInp.jImage);
-    formData.append("jCatagory", jobInp.jCatagory);
+    formData.append("jCatagory", [...jobInp.jCatagory]);
 
     fetch("/postnewjob", {
       method: "POST",
@@ -72,6 +72,7 @@ export default function JobPost() {
         jImage: "",
         jCatagory: [],
       });
+      setjobImage(undefined);
     });
   };
 

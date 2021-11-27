@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import JobApply from "./JobApply/JobApply";
 import "./JobCard.css";
@@ -32,6 +32,8 @@ export default function JobCard(props) {
     const data = await res.json();
     alert(data.msg);
   };
+
+  const history = useHistory();
 
   return (
     <div className="jobCard">
@@ -86,6 +88,18 @@ export default function JobCard(props) {
           );
         })}
       </div>
+      {props.isMyJob === true && (
+        <button
+          className="primaryButton filterJobCardBtn"
+          onClick={() => {
+            history.push(
+              `/user/${props.jUserId}/filterapplicants/${props.jobId}`
+            );
+          }}
+        >
+          Filter CV
+        </button>
+      )}
     </div>
   );
 }

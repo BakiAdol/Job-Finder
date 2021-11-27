@@ -62,3 +62,7 @@ div.jobCard div.jobCata p.jobCataItems {
   border-radius: 1rem;
   font-weight: 600;
 }
+
+button.filterJobCardBtn {
+  width: 100%;
+}

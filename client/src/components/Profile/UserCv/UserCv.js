@@ -27,10 +27,10 @@ export default function UserCv({ userId }) {
       if (res.status === 422) {
         return alert("server errror!");
       }
+      getUserDetails(loggedIn.rootUserId);
       alert("CV update Successfull!");
       setisUpdateCv(false);
     });
-    getUserDetails(loggedIn.rootUserId);
   };
 
   return (
@@ -91,7 +91,12 @@ export default function UserCv({ userId }) {
         </div>
       )}
 
-      {showMyCv && <ViewPDF cvUrl={userInfo.uCv} exitViewPdf={setshowMyCv} />}
+      {showMyCv && (
+        <ViewPDF
+          cvUrl={`/files/usercv/${userInfo.uCv}`}
+          exitViewPdf={setshowMyCv}
+        />
+      )}
     </div>
   );
 }

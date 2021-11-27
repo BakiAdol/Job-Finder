@@ -25,8 +25,8 @@ export default function Jobs(props) {
           <JobCard
             key={pos}
             className="JobCard"
-            jUserId={items.jUserId}
-            jUserName="User Name"
+            jUserId={items.jUserId._id}
+            jUserName={items.jUserId.uName}
             jPostDate={items.jPostDate}
             jDeadline={items.jDeadline}
             jTitle={items.jTitle}
@@ -34,6 +34,8 @@ export default function Jobs(props) {
             jImage={items.jImage}
             jCatagory={items.jCatagory}
             jApplicants={items.jApplicants}
+            isMyJob={true}
+            jobId={items._id}
           />
         );
       })}

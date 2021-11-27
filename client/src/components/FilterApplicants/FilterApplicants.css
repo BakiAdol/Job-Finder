@@ -1,0 +1,7 @@
+div.filterApplicantBody {
+  display: flex;
+}
+
+div.filterApplicantBody div.thisJobShow {
+  width: 30%;
+}

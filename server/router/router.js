@@ -10,6 +10,7 @@ const {
   ShowMyAllJobsFunction,
   ApplieForJobFunction,
   ShowMyAllApplieJobFunction,
+  getThisJobFunction,
 } = require("../controllers/jobController");
 const {
   registerFunction,
@@ -193,6 +194,9 @@ router.post("/myalljobs", ShowMyAllJobsFunction);
 
 // get my all applie job
 router.post("/myallappliejob", ShowMyAllApplieJobFunction);
+
+// get this job
+router.post("/getthisjob", getThisJobFunction);
 
 // apply for job
 const jobCvUpload = multer({
