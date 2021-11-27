@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
+import UserContext from "../../../context/UserContext";
+import ViewPDF from "../../ViewPDF/ViewPDF";
 import "./UserCv.css";
 
 export default function UserCv({ userId }) {
   const [isUpdateCv, setisUpdateCv] = useState(false);
+  const [showMyCv, setshowMyCv] = useState(false);
   const [uCv, setuCv] = useState();
   const [cvName, setcvName] = useState("");
   const { loggedIn } = useContext(AuthContext);
+  const { userInfo, getUserDetails } = useContext(UserContext);
 
   const cvUpdateController = (e) => {
     e.preventDefault();
@@ -26,6 +30,7 @@ export default function UserCv({ userId }) {
       alert("CV update Successfull!");
       setisUpdateCv(false);
     });
+    getUserDetails(loggedIn.rootUserId);
   };
 
   return (
@@ -39,7 +44,15 @@ export default function UserCv({ userId }) {
               : { justifyContent: "center" }
           }
         >
-          <button className="primaryButton">CV</button>
+          <button
+            className="primaryButton"
+            onClick={() => {
+              if (!userInfo.uCv) return alert("Didn't have CV!");
+              setshowMyCv(true);
+            }}
+          >
+            CV
+          </button>
           {loggedIn.rootUserId === userId && (
             <button
               className="primaryButton"
@@ -77,6 +90,8 @@ export default function UserCv({ userId }) {
           </div>
         </div>
       )}
+
+      {showMyCv && <ViewPDF cvUrl={userInfo.uCv} exitViewPdf={setshowMyCv} />}
     </div>
   );
 }

@@ -1,0 +1,22 @@
+div.pdfContainer {
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+}
+
+div.pdfContainer div.pdfBody {
+  width: 95%;
+  height: 95vh;
+  margin: 0 auto;
+}
+
+div.pdfContainer button.exitBtn {
+  background-color: red;
+  color: var(--c-white);
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
