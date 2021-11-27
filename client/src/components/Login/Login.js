@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import "../Register/Register.css";
+import "../register/Register.css";
 import { inputField } from "./fieldItems";
 
 export default function Login() {

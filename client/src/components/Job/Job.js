@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CataItems from "../Home/JobPost/CataItems";
+import CataItems from "../home/JobPost/CataItems";
 import "./Job.css";
 import JobCard from "./JobCard";
 

@@ -12,8 +12,15 @@ const jobSchema = new mongoose.Schema({
   jDescription: { type: String, required: true },
   jImage: { type: String },
   jCatagory: [{ type: String }],
-  jApplicants: [{ type: String }],
+  jApplicants: [
+    { jApplicantsId: mongoose.Schema.Types.ObjectId, jUserCvName: String },
+  ],
 });
+
+// {
+//   userId: String,
+//   jUserCvName: String,
+// },
 
 const Job = mongoose.model("job", jobSchema);
 

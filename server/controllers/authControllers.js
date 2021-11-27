@@ -164,10 +164,8 @@ module.exports = {
       const { _id } = req.body;
       const uPropic = req.file.filename;
       const previousPro = await User.findOne({ _id }, { uPropic: 1 });
-      console.log("aiche");
       if (previousPro.uPropic !== "blnkpropic.gif") {
         const imagePath = `../client//public//images//profilepic//${previousPro.uPropic}`;
-        console.log(imagePath);
         fs.unlinkSync(imagePath);
       }
 
@@ -192,7 +190,7 @@ module.exports = {
         {
           uName: { $regex: inputName, $options: "i" },
         },
-        { uName: 1 }
+        { uName: 1, uPropic: 1 }
       );
       res.send(user);
     } catch (err) {

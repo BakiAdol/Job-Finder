@@ -15,7 +15,6 @@ export default function JobPost() {
     jDescription: "",
     jImage: "",
     jCatagory: [],
-    jApplicants: [],
   });
 
   const hangleInput = (event) => {
@@ -45,15 +44,9 @@ export default function JobPost() {
     if (loggedIn.isLoggedIn === false) {
       return alert("Login in first!");
     }
-    let data = { ...jobInp };
-    let cata = "";
-    data.jCatagory.forEach((item, pos) => {
-      if (item.isSelected === 1) {
-        if (cata !== "") cata += ",";
-        cata += item.iName;
-      }
-    });
-    if (cata.length === 0) return alert("Add at lest one catagory!");
+
+    if (jobInp.jCatagory.length === 0)
+      return alert("Add at lest one catagory!");
 
     const formData = new FormData();
     formData.append("jUserId", loggedIn.rootUserId);
@@ -61,8 +54,7 @@ export default function JobPost() {
     formData.append("jTitle", jobInp.jTitle);
     formData.append("jDescription", jobInp.jDescription);
     formData.append("jImage", jobInp.jImage);
-    formData.append("jCatagory", cata);
-    formData.append("jApplicants", jobInp.jApplicants);
+    formData.append("jCatagory", jobInp.jCatagory);
 
     fetch("/postnewjob", {
       method: "POST",
@@ -78,10 +70,8 @@ export default function JobPost() {
         jTitle: "",
         jDescription: "",
         jImage: "",
-        jCatagory: CataItems,
-        jApplicants: [],
+        jCatagory: [],
       });
-      // return response.blob();
     });
   };
 

@@ -43,6 +43,15 @@ const jobImageStorage = multer.diskStorage({
   },
 });
 
+const jobCvStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client//public//files//jobapplicv");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
 const profileImageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client//public//images//profilepic");
@@ -165,7 +174,14 @@ router.post("/myalljobs", ShowMyAllJobsFunction);
 router.post("/myallappliejob", ShowMyAllApplieJobFunction);
 
 // apply for job
-router.post("/appliforjob", ApplieForJobFunction);
+const jobCvUpload = multer({
+  storage: jobCvStorage,
+});
+router.post(
+  "/appliforjob",
+  jobCvUpload.single("jApplicantsCv"),
+  ApplieForJobFunction
+);
 
 //....................... user searching router...................
 router.post("/searchuser", searchUsersFunction);

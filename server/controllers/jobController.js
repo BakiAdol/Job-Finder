@@ -6,15 +6,12 @@ require("../db/dbconn");
 
 module.exports = {
   async PostNewJobFunction(req, res) {
-    let { jUserId, jDeadline, jTitle, jDescription, jCatagory, jApplicants } =
-      req.body;
+    let { jUserId, jDeadline, jTitle, jDescription, jCatagory } = req.body;
 
     const jPostDate = new Date();
     let jImage;
     if (!req.file) jImage = "";
     else jImage = req.file.filename;
-
-    jCatagory = jCatagory.split(",");
 
     if (!jUserId || !jTitle || !jDescription || !jCatagory) {
       return res.status(422).json({ error: "Fill all fields!" });
@@ -28,9 +25,9 @@ module.exports = {
         jDescription,
         jImage,
         jCatagory,
-        jApplicants,
         jPostDate,
       });
+
       await newJob.save();
       res.status(201).json({ msg: "Job Post successful!" });
     } catch (error) {
@@ -86,20 +83,31 @@ module.exports = {
   },
   async ApplieForJobFunction(req, res) {
     try {
-      const { userId, jobId } = req.body;
+      const { jApplicantsId, jobId } = req.body;
+      const jUserCvName = req.file.filename;
+
       const alreadyAppli = await User.findOne({
-        _id: userId,
+        _id: jApplicantsId,
         uJobApplies: { $in: [jobId] },
       });
 
       if (alreadyAppli) {
-        return res.status(422).json({ msg: "You Already Applied!" });
+        return res.status(300).json({ msg: "You Already Applied!" });
       }
       const updateAppli = await User.updateOne(
-        { _id: userId },
+        { _id: jApplicantsId },
         {
           $push: {
             uJobApplies: jobId,
+          },
+        }
+      );
+
+      const updateAppliJob = await Job.updateOne(
+        { _id: jobId },
+        {
+          $push: {
+            jApplicants: { jApplicantsId, jUserCvName },
           },
         }
       );
