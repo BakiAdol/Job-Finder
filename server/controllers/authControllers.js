@@ -183,6 +183,32 @@ module.exports = {
     }
   },
 
+  async updateUserCvFunction(req, res) {
+    try {
+      const { _id } = req.body;
+      const uCv = req.file.filename;
+
+      const previousCv = await User.findOne({ _id }, { uCv: 1 });
+
+      if (previousCv.uCv) {
+        const cvPath = `../client//public//files//usercv//${previousCv.uCv}`;
+        fs.unlinkSync(cvPath);
+      }
+
+      const updateUserCv = await User.updateOne(
+        { _id },
+        {
+          $set: {
+            uCv,
+          },
+        }
+      );
+      res.json({ success: "Update successful!" });
+    } catch (err) {
+      return res.status(422).json({ error: "Server error!" });
+    }
+  },
+
   async searchUsersFunction(req, res) {
     try {
       const { inputName } = req.body;

@@ -10,6 +10,7 @@ import "./Profile.css";
 import profileLinkItem from "./profileLinkItem";
 import Projects from "./Projects/Projects";
 import UpdateProPic from "./UpdateProPic/UpdateProPic";
+import UserCv from "./UserCv/UserCv";
 
 export default function Profile(props) {
   const { loggedIn } = useContext(AuthContext);
@@ -63,6 +64,7 @@ export default function Profile(props) {
       <div className="profileBody">
         <div className="profileLeftBody">
           <Bio {...props} userId={uId} />
+          <UserCv userId={uId} />
         </div>
         <div className="profileRightBody">
           <div className="profileLinks">

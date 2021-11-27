@@ -1,0 +1,28 @@
+div.userCvBody div.bioCvBody {
+  background-color: var(--c-white);
+  display: flex;
+  padding: 0.5rem;
+}
+
+div.userUpdateCvBody {
+  background-color: var(--c-white);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.userUpdateCvBody input {
+  display: none;
+}
+
+div.userUpdateCvBody p {
+  color: var(--c-dark-gray);
+  padding: 0.5rem;
+}
+
+div.userUpdateCvBody div.cvupSaveCancelBtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

@@ -22,6 +22,7 @@ const {
   updateProjectsFunction,
   searchUsersFunction,
   updateUserProfilePicFunction,
+  updateUserCvFunction,
 } = require("../controllers/authControllers");
 
 // ..............image uploda functions.................
@@ -46,6 +47,15 @@ const jobImageStorage = multer.diskStorage({
 const jobCvStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client//public//files//jobapplicv");
+  },
+  filename: function (req, file, cb) {
+    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const userCvStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../client//public//files//usercv");
   },
   filename: function (req, file, cb) {
     cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
@@ -86,6 +96,17 @@ router.post("/profileupdate/experiences", updateExperiencesFunction);
 
 // update user profects
 router.post("/profileupdate/projects", updateProjectsFunction);
+
+//update user cv
+const userCvUpload = multer({
+  storage: userCvStorage,
+});
+
+router.post(
+  "/profileupdate/cv",
+  userCvUpload.single("uCv"),
+  updateUserCvFunction
+);
 
 // update user profile picture
 const profileImageUpload = multer({
