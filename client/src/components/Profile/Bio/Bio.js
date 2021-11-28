@@ -77,7 +77,6 @@ export default function Bio(props) {
               </div>
             );
           })}
-          <div className="cvContainer">CV</div>
           {loggedIn.rootUserId === props.userId && (
             <div className="width35p marginZeroAuto">
               <button

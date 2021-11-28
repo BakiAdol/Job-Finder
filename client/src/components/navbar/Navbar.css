@@ -1,14 +1,16 @@
 div.navBody {
   background-color: var(--c-primary);
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 3.4rem;
 }
 div.NavContainer {
   width: 96%;
   display: flex;
   justify-content: space-between;
+}
+
+div.NavContainer div.links,
+div.NavContainer div.navJoin {
+  margin-top: 1rem;
 }
 
 div.NavContainer div.links .navLink,
@@ -19,4 +21,9 @@ div.NavContainer div.links .navLink,
   color: white;
   font-weight: 600;
   letter-spacing: 0.1rem;
+}
+
+div.NavContainer div.navLogo img {
+  width: 9rem;
+  margin-top: 0.3rem;
 }

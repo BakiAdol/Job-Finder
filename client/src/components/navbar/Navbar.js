@@ -10,7 +10,9 @@ export default function Navbar() {
   return (
     <div className="navBody">
       <div className="NavContainer">
-        <div className="navLogo">JF</div>
+        <div className="navLogo">
+          <img src="/jobfinderLogo.png" alt="" />
+        </div>
         <div className="links">
           {NavLinkItems.map((item, pos) => {
             return (

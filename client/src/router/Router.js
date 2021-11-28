@@ -19,11 +19,6 @@ export default function Router() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/jobs" component={Job} />
-        <Route
-          exact
-          path="/user/:jUserId/filterapplicants/:jobId"
-          component={FilterApplicants}
-        />
 
         {loggedIn.isLoggedIn === false && (
           <>
@@ -33,16 +28,23 @@ export default function Router() {
         )}
 
         {loggedIn.isLoggedIn === true && (
-          <Route
-            path="/profile/:userId"
-            render={(props) => (
-              // <Profile {...props} userId={loggedIn.rootUserId} />
+          <>
+            <Route
+              path="/profile/:userId"
+              render={(props) => (
+                // <Profile {...props} userId={loggedIn.rootUserId} />
 
-              <UserContextProvider>
-                <Profile {...props} />
-              </UserContextProvider>
-            )}
-          />
+                <UserContextProvider>
+                  <Profile {...props} />
+                </UserContextProvider>
+              )}
+            />
+            <Route
+              exact
+              path="/filterapplicants/:jUserId/:jobId"
+              component={FilterApplicants}
+            />
+          </>
         )}
       </Switch>
       <Footer />

@@ -92,9 +92,7 @@ export default function JobCard(props) {
         <button
           className="primaryButton filterJobCardBtn"
           onClick={() => {
-            history.push(
-              `/user/${props.jUserId}/filterapplicants/${props.jobId}`
-            );
+            history.push(`/filterapplicants/${props.jUserId}/${props.jobId}`);
           }}
         >
           Filter CV
