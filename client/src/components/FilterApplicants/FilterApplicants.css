@@ -1,7 +1,120 @@
 div.filterApplicantBody {
+  width: 100%;
   display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 div.filterApplicantBody div.thisJobShow {
-  width: 30%;
+  width: 40%;
+}
+
+div.filterApplicantBody div.filterShow div.preferenceBody {
+  width: 20rem;
+}
+div.filterApplicantBody div.filterShow {
+  margin-left: 3rem;
+}
+div.preferenceBody div.inputPref {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--c-white);
+}
+div.preferenceBody div.inputPref input {
+  width: 77%;
+  border: none;
+  background: var(--c-light-gray);
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--c-dark-gray);
+}
+
+div.preferenceBody div.inputPref button {
+  width: 20%;
+  margin-left: 3%;
+}
+div.preferenceBody div.showPreferences div.singlePref {
+  background-color: var(--c-white);
+  margin: 0.5rem 0 0.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+div.preferenceBody div.showPreferences p {
+  font-size: 1rem;
+  color: var(--c-dark-gray);
+  width: 90%;
+  font-weight: 600;
+}
+
+div.preferenceBody div.showPreferences button {
+  width: 10%;
+  background: none;
+  color: red;
+  font-size: 1rem;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+div.applicantList p:nth-child(1) {
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--c-primary);
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+div.singleApplicantBody {
+  background-color: var(--c-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem;
+  margin: 0.5rem 0 0.5rem;
+}
+
+div.singleApplicantBody p {
+  font-size: 1.08rem;
+  color: var(--c-dark-gray);
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 900px) {
+  div.filterApplicantBody div.thisJobShow {
+    width: 50%;
+  }
+  div.filterApplicantBody div.filterShow {
+    margin-left: 1rem;
+  }
+}
+
+@media only screen and (max-width: 710px) {
+  div.filterApplicantBody {
+    flex-direction: column;
+    align-items: center;
+  }
+  div.filterApplicantBody div.thisJobShow {
+    width: 75%;
+  }
+  div.filterApplicantBody div.filterShow {
+    margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  div.filterApplicantBody div.thisJobShow {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  div.filterApplicantBody div.thisJobShow,
+  div.filterApplicantBody div.filterShow {
+    width: 95%;
+  }
+  div.filterApplicantBody div.filterShow div.preferenceBody {
+    width: 100%;
+  }
 }
