@@ -12,7 +12,7 @@ const profileLinkItem = [
     link: "/jobs",
   },
   {
-    linkName: "Applies",
+    linkName: "Applied",
     link: "/applies",
   },
 ];

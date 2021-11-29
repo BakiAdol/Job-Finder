@@ -10,20 +10,72 @@ div.jobApplyBody {
   justify-content: center;
 }
 
+.appliHeadline {
+  font-size: 1.2rem;
+  color: var(--c-dark-gray);
+  font-weight: 600;
+}
+
 div.jobApplyBody div.jobApplyContainer {
   background-color: var(--c-white);
-  width: 20rem;
+  width: 30rem;
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-div.jobApplyBody div.jobApplyContainer input {
+div.jobApplyBody div.jobApplyContainer input[type="file"] {
   display: none;
 }
 
-div.jobApplyBody div.jobApplyContainer p {
+div.cataInpForAppli {
+  width: 100%;
+  margin: 0.5rem 0 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+div.cataInpForAppli input {
+  width: 88%;
+  border: none;
+  background: var(--c-light-gray);
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--c-dark-gray);
+}
+
+div.appliKeywordBOdy {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div.appliSingleKeyWord {
+  width: fit-content;
+  background-color: var(--c-light-gray);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+div.appliSingleKeyWord p {
+  color: var(--c-dark-gray);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+div.appliSingleKeyWord button {
+  background: none;
+  color: red;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+div.jobApplyBody div.jobApplyContainer p.cvName {
   padding: 0.5rem;
 }
 

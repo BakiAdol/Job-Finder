@@ -13,7 +13,12 @@ const jobSchema = new mongoose.Schema({
   jImage: { type: String },
   jCatagory: [{ type: String }],
   jApplicants: [
-    { jApplicantsId: mongoose.Schema.Types.ObjectId, jUserCvName: String },
+    {
+      jApplicantsId: mongoose.Schema.Types.ObjectId,
+      jUserCvName: String,
+      jApplicantKeywords: [{ type: String }],
+      jUserMarked: Boolean,
+    },
   ],
 });
 

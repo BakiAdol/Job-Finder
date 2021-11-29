@@ -3,14 +3,14 @@ div.navBody {
   height: 3.4rem;
 }
 div.NavContainer {
-  width: 96%;
   display: flex;
   justify-content: space-between;
+  margin: 0 3%;
 }
 
 div.NavContainer div.links,
 div.NavContainer div.navJoin {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 div.NavContainer div.links .navLink,

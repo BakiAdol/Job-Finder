@@ -261,6 +261,7 @@ export default function EditBio(props) {
         </button>
 
         <button
+          style={{ backgroundColor: "red" }}
           onClick={() => {
             props.setEditBio(false);
           }}

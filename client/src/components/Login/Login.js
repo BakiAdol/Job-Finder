@@ -66,6 +66,9 @@ export default function Login() {
           <p>Not have an account?</p>
           <Link to="/register"> Register</Link>
         </div>
+        <div className="alreadyAccount">
+          <Link to="/register"> Reset Password</Link>
+        </div>
       </div>
     </div>
   );

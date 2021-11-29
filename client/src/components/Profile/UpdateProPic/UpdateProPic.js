@@ -46,6 +46,7 @@ export default function UpdateProPic({ rootUserId, setupdatePropic }) {
             Update
           </button>
           <button
+            style={{ backgroundColor: "red" }}
             className="primaryButton"
             onClick={() => setupdatePropic(false)}
           >

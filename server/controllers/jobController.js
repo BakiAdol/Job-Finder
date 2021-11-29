@@ -88,8 +88,10 @@ module.exports = {
   },
   async ApplieForJobFunction(req, res) {
     try {
-      const { jApplicantsId, jobId } = req.body;
+      let { jApplicantsId, jobId, jApplicantKeywords } = req.body;
       const jUserCvName = req.file.filename;
+      const jUserMarked = false;
+      jApplicantKeywords = jApplicantKeywords.split(",");
 
       const alreadyAppli = await User.findOne({
         _id: jApplicantsId,
@@ -112,7 +114,12 @@ module.exports = {
         { _id: jobId },
         {
           $push: {
-            jApplicants: { jApplicantsId, jUserCvName },
+            jApplicants: {
+              jApplicantsId,
+              jUserCvName,
+              jApplicantKeywords,
+              jUserMarked,
+            },
           },
         }
       );

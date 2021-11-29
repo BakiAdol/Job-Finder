@@ -3,7 +3,7 @@ div.regContainer {
   background: var(--c-white);
   width: 30%;
   padding: 1rem;
-  min-width: 300px;
+  min-width: 25rem;
   margin: 1rem auto;
 }
 

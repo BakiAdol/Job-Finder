@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
+import { useHistory } from "react-router";
 import JobCard from "../Job/JobCard";
 import ViewPDF from "../ViewPDF/ViewPDF";
 import "./FilterApplicants.css";
@@ -6,6 +8,8 @@ import "./FilterApplicants.css";
 export default function FilterApplicants(props) {
   const jUserId = props.match.params.jUserId;
   const jobId = props.match.params.jobId;
+
+  const history = useHistory();
 
   const [job, setjob] = useState(undefined);
   const [showThisCv, setshowThisCv] = useState(false);
@@ -95,10 +99,16 @@ export default function FilterApplicants(props) {
           ) : (
             <p>Applicants</p>
           )}
+          <div className="filterAllApplicantsCata">
+            <button className="primaryButton">All</button>
+            <button className="primaryButton">Marked</button>
+            <button className="primaryButton">Unmarked</button>
+          </div>
           {job.jApplicants.map((item, pos) => {
+            console.log(item);
             return (
-              <>
-                <div key={pos} className="singleApplicantBody">
+              <div key={pos}>
+                <div className="singleApplicantBody">
                   <button
                     className="primaryButton"
                     onClick={() => {
@@ -108,12 +118,29 @@ export default function FilterApplicants(props) {
                   >
                     CV
                   </button>
-                  <p>Score</p>
+                  <button
+                    className="primaryButton"
+                    onClick={() =>
+                      history.push(`/profile/${item.jApplicantsId}`)
+                    }
+                  >
+                    Profile
+                  </button>
+                  {/* <p>X</p> */}
+                  {item.jUserMarked ? (
+                    <MdCheckBox
+                      style={{ fontSize: "1.5rem", color: "green" }}
+                    />
+                  ) : (
+                    <MdCheckBoxOutlineBlank
+                      style={{ fontSize: "1.5rem", color: "gray" }}
+                    />
+                  )}
                 </div>
                 {showThisCv === true && (
                   <ViewPDF cvUrl={cvUrl} exitViewPdf={setshowThisCv} />
                 )}
-              </>
+              </div>
             );
           })}
         </div>

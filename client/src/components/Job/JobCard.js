@@ -61,7 +61,7 @@ export default function JobCard(props) {
             <span
               style={{
                 color:
-                  postDeadline < new Date().toLocaleDateString()
+                  new Date(props.jDeadline) < new Date().toLocaleDateString()
                     ? "#FC522D"
                     : "#0CB82B",
               }}
