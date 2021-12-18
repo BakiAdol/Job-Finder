@@ -15,6 +15,39 @@ div.filterApplicantBody div.filterShow div.preferenceBody {
 div.filterApplicantBody div.filterShow {
   margin-left: 3rem;
 }
+
+div.cataContainer select {
+  appearance: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--c-light-gray);
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0.4rem 0 0.5rem 0;
+  color: var(--c-dark-gray);
+  font-weight: 700;
+}
+
+div.selectedItemShow {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--c-white);
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--c-dark-gray);
+  margin-top: 0.5rem;
+  font-weight: 700;
+}
+
+div.selectedItemShow span {
+  cursor: pointer;
+  color: var(--c-error);
+  font-weight: 700;
+}
+
 div.preferenceBody div.inputPref {
   width: 100%;
   padding: 0.5rem;

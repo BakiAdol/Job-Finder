@@ -52,6 +52,7 @@ body {
   cursor: pointer;
   font-weight: 600;
 }
-input:focus {
+input:focus,
+select:focus {
   outline: none;
 }

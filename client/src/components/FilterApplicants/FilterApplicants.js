@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 import { useHistory } from "react-router";
+import CataItems from "../home/JobPost/CataItems";
 import JobCard from "../Job/JobCard";
 import ViewPDF from "../ViewPDF/ViewPDF";
 import "./FilterApplicants.css";
@@ -8,8 +9,9 @@ import "./FilterApplicants.css";
 export default function FilterApplicants(props) {
   const jUserId = props.match.params.jUserId;
   const jobId = props.match.params.jobId;
-
   const history = useHistory();
+
+  const [whoToPrint, setwhoToPrint] = useState(0);
 
   const [job, setjob] = useState(undefined);
   const [showThisCv, setshowThisCv] = useState(false);
@@ -28,11 +30,14 @@ export default function FilterApplicants(props) {
       .then((data) => {
         setjob(data);
       });
+
+    console.log("lem".match(/.*obl.*/));
   };
 
   useEffect(() => {
     getThisJobs();
   }, []);
+
   if (job === undefined) return "";
   return (
     <div className="filterApplicantBody minHeight90vh">
@@ -52,7 +57,7 @@ export default function FilterApplicants(props) {
       </div>
       <div className="filterShow">
         <div className="preferenceBody">
-          <div className="inputPref">
+          {/* <div className="inputPref">
             <input
               type="text"
               value={cataInput}
@@ -71,8 +76,8 @@ export default function FilterApplicants(props) {
             >
               Filter
             </button>
-          </div>
-          <div className="showPreferences">
+          </div> */}
+          {/* <div className="showPreferences">
             {filterCatagory.map((item, pos) => {
               return (
                 <div key={pos} className="singlePref">
@@ -91,6 +96,48 @@ export default function FilterApplicants(props) {
                 </div>
               );
             })}
+          </div> */}
+
+          <div className="cataContainer">
+            <select
+              name="jCatagory"
+              onChange={(e) => {
+                const cataVal = e.target.value;
+                if (
+                  cataVal !== "Catagory" &&
+                  filterCatagory.includes(cataVal) === false
+                ) {
+                  setfilterCatagory([...filterCatagory, cataVal]);
+                }
+              }}
+            >
+              {CataItems.map((items, pos) => {
+                return (
+                  <option key={pos} value={items}>
+                    {items}
+                  </option>
+                );
+              })}
+            </select>
+
+            {filterCatagory.map((items, pos) => {
+              return (
+                <div className="selectedItemShow" key={pos}>
+                  <p>{items}</p>
+                  <span
+                    onClick={() => {
+                      let cataI = [...filterCatagory];
+                      cataI = cataI.filter((itm) => {
+                        return itm !== items;
+                      });
+                      setfilterCatagory([...cataI]);
+                    }}
+                  >
+                    X
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="applicantList">
@@ -100,12 +147,20 @@ export default function FilterApplicants(props) {
             <p>Applicants</p>
           )}
           <div className="filterAllApplicantsCata">
-            <button className="primaryButton">All</button>
-            <button className="primaryButton">Marked</button>
-            <button className="primaryButton">Unmarked</button>
+            <button className="primaryButton" onClick={() => setwhoToPrint(0)}>
+              All
+            </button>
+            <button className="primaryButton" onClick={() => setwhoToPrint(1)}>
+              Marked
+            </button>
+            <button className="primaryButton" onClick={() => setwhoToPrint(2)}>
+              Unmarked
+            </button>
           </div>
           {job.jApplicants.map((item, pos) => {
-            console.log(item);
+            if (whoToPrint === 1 && item.jUserMarked !== 1) return "";
+            if (whoToPrint === 2 && item.jUserMarked === 1) return "";
+
             return (
               <div key={pos}>
                 <div className="singleApplicantBody">

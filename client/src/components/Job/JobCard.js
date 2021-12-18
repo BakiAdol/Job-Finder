@@ -58,6 +58,7 @@ export default function JobCard(props) {
           <p>{postDate}</p>
           <p>
             Deadline:{" "}
+            {/* {console.log(props.jDeadline, new Date().toLocaleDateString())} */}
             <span
               style={{
                 color:
