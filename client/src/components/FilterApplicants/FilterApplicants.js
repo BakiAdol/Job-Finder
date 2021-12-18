@@ -30,8 +30,25 @@ export default function FilterApplicants(props) {
       .then((data) => {
         setjob(data);
       });
+  };
 
-    console.log("lem".match(/.*obl.*/));
+  const markUnmarkApplicants = (applicantsId, didMark) => {
+    let allApplicants = [...job.jApplicants];
+    allApplicants.map((val) => {
+      if (val.jApplicantsId === applicantsId) {
+        val.jUserMarked = didMark;
+      }
+      return val;
+    });
+
+    const headers = { "Content-Type": "application/json" };
+    fetch("/updateapplicantsmark", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ jobId, allApplicants }),
+    }).then(() => {
+      getThisJobs();
+    });
   };
 
   useEffect(() => {
@@ -158,8 +175,18 @@ export default function FilterApplicants(props) {
             </button>
           </div>
           {job.jApplicants.map((item, pos) => {
-            if (whoToPrint === 1 && item.jUserMarked !== 1) return "";
-            if (whoToPrint === 2 && item.jUserMarked === 1) return "";
+            if (whoToPrint === 1 && item.jUserMarked !== true) return "";
+            if (whoToPrint === 2 && item.jUserMarked === true) return "";
+
+            let isInFilter = filterCatagory.length === 0;
+            for (let i = 0, len = filterCatagory.length; i < len; i++) {
+              if (
+                item.jApplicantKeywords.includes(filterCatagory[i]) === true
+              ) {
+                isInFilter = true;
+              }
+            }
+            if (isInFilter === false) return "";
 
             return (
               <div key={pos}>
@@ -185,10 +212,16 @@ export default function FilterApplicants(props) {
                   {item.jUserMarked ? (
                     <MdCheckBox
                       style={{ fontSize: "1.5rem", color: "green" }}
+                      onClick={() => {
+                        markUnmarkApplicants(item.jApplicantsId, false);
+                      }}
                     />
                   ) : (
                     <MdCheckBoxOutlineBlank
                       style={{ fontSize: "1.5rem", color: "gray" }}
+                      onClick={() => {
+                        markUnmarkApplicants(item.jApplicantsId, true);
+                      }}
                     />
                   )}
                 </div>

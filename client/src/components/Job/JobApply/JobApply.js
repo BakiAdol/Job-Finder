@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
+import CataItems from "../../home/JobPost/CataItems";
 import "./JobApply.css";
 
 export default function JobApply({ setisApply, jobId }) {
   const [myKeywords, setmyKeywords] = useState([]);
   const [inpKeyword, setinpKeyword] = useState("");
+  const [filterCatagory, setfilterCatagory] = useState([]);
 
   const { loggedIn } = useContext(AuthContext);
   const [jApplicantsCv, setjApplicantsCv] = useState();
@@ -21,7 +23,7 @@ export default function JobApply({ setisApply, jobId }) {
     formData.append("jApplicantsCv", jApplicantsCv);
     formData.append("jobId", jobId);
     formData.append("jApplicantsId", loggedIn.rootUserId);
-    formData.append("jApplicantKeywords", myKeywords);
+    formData.append("jApplicantKeywords", filterCatagory);
 
     fetch("/appliforjob", {
       method: "POST",
@@ -41,7 +43,7 @@ export default function JobApply({ setisApply, jobId }) {
     <div className="jobApplyBody">
       <div className="jobApplyContainer">
         <p className="appliHeadline">More skills helps to find you</p>
-        <div className="cataInpForAppli">
+        {/* <div className="cataInpForAppli">
           <input
             type="text"
             name="jKeyword"
@@ -63,9 +65,9 @@ export default function JobApply({ setisApply, jobId }) {
           >
             Add
           </button>
-        </div>
+        </div> */}
 
-        <div className="appliKeywordBOdy">
+        {/* <div className="appliKeywordBOdy">
           {myKeywords.map((item, pos) => {
             return (
               <div key={pos} className="appliSingleKeyWord">
@@ -84,6 +86,50 @@ export default function JobApply({ setisApply, jobId }) {
               </div>
             );
           })}
+        </div> */}
+        <div className="inpSkillBody">
+          <div className="skillContainer">
+            <select
+              className="skillSelect"
+              name="jCatagory"
+              onChange={(e) => {
+                const cataVal = e.target.value;
+                if (
+                  cataVal !== "Catagory" &&
+                  filterCatagory.includes(cataVal) === false
+                ) {
+                  setfilterCatagory([...filterCatagory, cataVal]);
+                }
+              }}
+            >
+              {CataItems.map((items, pos) => {
+                return (
+                  <option key={pos} value={items}>
+                    {items}
+                  </option>
+                );
+              })}
+            </select>
+
+            {filterCatagory.map((items, pos) => {
+              return (
+                <div className="selectedItemShow" key={pos}>
+                  <p>{items}</p>
+                  <span
+                    onClick={() => {
+                      let cataI = [...filterCatagory];
+                      cataI = cataI.filter((itm) => {
+                        return itm !== items;
+                      });
+                      setfilterCatagory([...cataI]);
+                    }}
+                  >
+                    X
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <label className="primaryButton">

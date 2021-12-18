@@ -142,4 +142,23 @@ module.exports = {
       return res.status(422).json({ error: "Server Error!" });
     }
   },
+  async MarkUnmarkApplicantFunction(req, res) {
+    try {
+      const { jobId, allApplicants } = req.body;
+
+      const updateAppli = await Job.updateOne(
+        { _id: jobId },
+        {
+          $set: {
+            jApplicants: allApplicants,
+          },
+        }
+      );
+
+      res.send("seccess");
+    } catch (error) {
+      console.log(error);
+      return res.status(422).json({ error: "Server Error!" });
+    }
+  },
 };

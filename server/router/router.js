@@ -11,6 +11,7 @@ const {
   ApplieForJobFunction,
   ShowMyAllApplieJobFunction,
   getThisJobFunction,
+  MarkUnmarkApplicantFunction,
 } = require("../controllers/jobController");
 const {
   registerFunction,
@@ -208,6 +209,8 @@ router.post(
   ApplieForJobFunction
 );
 
+// mark unmark applicants
+router.post("/updateapplicantsmark", MarkUnmarkApplicantFunction);
 //....................... user searching router...................
 router.post("/searchuser", searchUsersFunction);
 
