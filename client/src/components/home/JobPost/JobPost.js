@@ -101,6 +101,7 @@ export default function JobPost() {
               <input
                 name="jImage"
                 type="file"
+                accept="image/*"
                 onChange={(e) => {
                   setjobInp({ ...jobInp, jImage: e.target.files[0] });
                   const imgurl = URL.createObjectURL(e.target.files[0]);

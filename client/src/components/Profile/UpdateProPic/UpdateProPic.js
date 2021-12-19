@@ -33,6 +33,7 @@ export default function UpdateProPic({ rootUserId, setupdatePropic }) {
         <label>
           <input
             type="file"
+            accept="image/*"
             onChange={(e) => {
               setuPropic(e.target.files[0]);
               const imgurl = URL.createObjectURL(e.target.files[0]);

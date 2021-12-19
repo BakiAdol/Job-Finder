@@ -69,6 +69,7 @@ export default function UserCv({ userId }) {
             <input
               name="jImage"
               type="file"
+              accept=".pdf"
               onChange={(e) => {
                 setuCv(e.target.files[0]);
                 setcvName(e.target.files[0].name);

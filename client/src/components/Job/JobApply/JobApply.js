@@ -137,6 +137,7 @@ export default function JobApply({ setisApply, jobId }) {
           <input
             name="jImage"
             type="file"
+            accept=".pdf"
             onChange={(e) => {
               setjApplicantsCv(e.target.files[0]);
               setcvName(e.target.files[0].name);

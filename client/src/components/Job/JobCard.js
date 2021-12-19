@@ -57,17 +57,16 @@ export default function JobCard(props) {
         <div className="dateShow">
           <p>{postDate}</p>
           <p>
-            Deadline:{" "}
-            {/* {console.log(props.jDeadline, new Date().toLocaleDateString())} */}
+            Deadline:
             <span
               style={{
                 color:
-                  new Date(props.jDeadline) < new Date().toLocaleDateString()
+                  new Date(props.jDeadline) < new Date()
                     ? "#FC522D"
                     : "#0CB82B",
               }}
             >
-              {postDeadline}
+              {" " + postDeadline}
             </span>
           </p>
         </div>
@@ -75,7 +74,7 @@ export default function JobCard(props) {
 
       <h2 className="titleShow">{props.jTitle}</h2>
       <p className="desShow">{props.jDescription}</p>
-      {props.jImage !== "" ? (
+      {props.jImage ? (
         <img src={`/images/jobimages/${props.jImage}`} alt="" />
       ) : (
         ""

@@ -19,15 +19,17 @@ module.exports = {
     }
 
     try {
-      const newJob = new Job({
+      let newJ = {
         jUserId,
         jDeadline,
         jTitle,
         jDescription,
-        jImage,
         jCatagory,
         jPostDate,
-      });
+      };
+
+      if (jImage) newJ.jImage = jImage;
+      const newJob = new Job(newJ);
 
       await newJob.save();
       res.status(201).json({ msg: "Job Post successful!" });
