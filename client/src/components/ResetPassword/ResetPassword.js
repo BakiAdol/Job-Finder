@@ -1,4 +1,5 @@
-import React, { useHistory, useState } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./ResetPassword.css";
 
 export default function ResetPassword(props) {

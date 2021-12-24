@@ -25,6 +25,7 @@ const {
   searchUsersFunction,
   updateUserProfilePicFunction,
   updateUserCvFunction,
+  resetPasswordFunction,
 } = require("../controllers/authControllers");
 
 // ..............image uploda functions.................
@@ -82,6 +83,9 @@ router.post("/login", loginFunction);
 
 // logout
 router.get("/logout", logoutFunction);
+
+//reset pass
+router.post("/resetuserpassword", resetPasswordFunction);
 
 // loggedIn
 router.get("/loggedin", loggendInFunction);

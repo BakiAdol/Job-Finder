@@ -106,6 +106,33 @@ module.exports = {
     }
   },
 
+  async resetPasswordFunction(req, res) {
+    const { uEmail, uPassword } = req.body;
+
+    try {
+      const userExist = await User.findOne({ uEmail: uEmail });
+      if (!userExist) {
+        return res.status(422).json({ error: "Email Didn't Exist!" });
+      }
+
+      const salt = await bcrypt.genSalt((saltRounds = 10));
+      const hasPass = await bcrypt.hash(uPassword, salt);
+
+      const updateInfo = await User.updateOne(
+        { uEmail },
+        {
+          $set: {
+            uPassword: hasPass,
+          },
+        }
+      );
+
+      res.status(201).json({ msg: "Reset password successful!" });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   async updaetBioFunction(req, res) {
     try {
       const { userId, userEdu, userAddr, userLink } = req.body;
