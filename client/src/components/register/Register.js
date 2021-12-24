@@ -29,8 +29,6 @@ export default function Register() {
   const insertNewUser = async (e) => {
     e.preventDefault();
 
-    console.log(verifyCodeUser, verifyCodeReal);
-
     if (verifyCodeUser.toString() !== verifyCodeReal.toString())
       return alert("Wrond verification code!");
     setverifyCodeUser("");

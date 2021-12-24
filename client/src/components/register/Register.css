@@ -23,7 +23,8 @@ div.regContainer p.errorShow {
 div.regContainer form.regForm input[type="text"],
 input[type="email"],
 input[type="password"],
-div.verifyBLock input {
+div.verifyBLock input,
+div.resetPassBody input {
   width: 100%;
   border: none;
   background: var(--c-light-gray);
@@ -50,7 +51,9 @@ form.regForm label {
   margin: 0 1rem 0 0.5rem;
 }
 
-div.regContainer form button {
+div.regContainer form button,
+div.resetPassCodeBlock button,
+div.resetPassBody button {
   width: 100%;
   border: none;
   background: var(--c-primary);

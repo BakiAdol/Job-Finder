@@ -1,3 +1,5 @@
+import { Button } from "@react-pdf-viewer/core";
+import emailjs from "emailjs-com";
 import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
@@ -67,7 +69,43 @@ export default function Login() {
           <Link to="/register"> Register</Link>
         </div>
         <div className="alreadyAccount">
-          <Link to="/register"> Reset Password</Link>
+          <Button
+            onClick={() => {
+              const uEmail = logData.uEmail;
+              if (!uEmail) return seterrorShow("Enter email!");
+
+              const realVeryfyCode = Math.floor(
+                100000 + Math.random() * 900000
+              );
+
+              emailjs
+                .send(
+                  "service_a1n5x2g",
+                  "template_f2q74da",
+                  {
+                    from_name: "Job Finder",
+                    to_name: "user",
+                    message: realVeryfyCode,
+                    reply_to: uEmail,
+                  },
+                  "user_fCWmqmpZpwJKwH4knjcoA"
+                )
+                .then(
+                  function (response) {},
+                  function (error) {
+                    alert("Verification error!");
+                  }
+                );
+
+              history.push({
+                pathname: "/resetpassword",
+                state: { uEmail: uEmail, realVeryfyCode: realVeryfyCode },
+              });
+            }}
+          >
+            {" "}
+            Reset Password
+          </Button>
         </div>
       </div>
     </div>

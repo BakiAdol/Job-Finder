@@ -8,6 +8,7 @@ import Login from "../components/Login/Login";
 import Navbar from "../components/navbar/Navbar";
 import Profile from "../components/Profile/Profile";
 import Register from "../components/register/Register";
+import ResetPassword from "../components/ResetPassword/ResetPassword";
 import AuthContext from "../context/AuthContext";
 import { UserContextProvider } from "../context/UserContext";
 
@@ -24,6 +25,7 @@ export default function Router() {
           <>
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/resetpassword" component={ResetPassword} />
           </>
         )}
 
