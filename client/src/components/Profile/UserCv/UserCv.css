@@ -13,7 +13,13 @@ div.userUpdateCvBody {
 }
 
 div.userUpdateCvBody input {
-  display: none;
+  width: 100%;
+  border: none;
+  background: var(--c-light-gray);
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: var(--c-dark-gray);
+  margin-bottom: 0.5rem;
 }
 
 div.userUpdateCvBody p {

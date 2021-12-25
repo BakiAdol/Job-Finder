@@ -194,8 +194,8 @@ export default function FilterApplicants(props) {
                   <button
                     className="primaryButton"
                     onClick={() => {
-                      setshowThisCv(true);
-                      setcvUrl(`/files/jobapplicv/${item.jUserCvName}`);
+                      const win = window.open(item.jUserCvName, "_blank");
+                      // win.focus();
                     }}
                   >
                     CV

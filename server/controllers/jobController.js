@@ -88,10 +88,9 @@ module.exports = {
   },
   async ApplieForJobFunction(req, res) {
     try {
-      let { jApplicantsId, jobId, jApplicantKeywords } = req.body;
-      const jUserCvName = req.file.filename;
+      let { jApplicantsId, jobId, jApplicantKeywords, jUserCvName } = req.body;
+
       const jUserMarked = false;
-      jApplicantKeywords = jApplicantKeywords.split(",");
 
       const alreadyAppli = await User.findOne({
         _id: jApplicantsId,

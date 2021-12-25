@@ -13,21 +13,28 @@ export default function JobApply({ setisApply, jobId }) {
   const [cvName, setcvName] = useState("");
   const jobApplyControler = (e) => {
     e.preventDefault();
-    if (cvName === "") return alert("Upload your CV");
+    if (cvName === "") return alert("Upload your CV link");
     if (loggedIn.isLoggedIn === false) {
       return alert("Login in first");
     }
-    setcvName("");
 
-    const formData = new FormData();
-    formData.append("jApplicantsCv", jApplicantsCv);
-    formData.append("jobId", jobId);
-    formData.append("jApplicantsId", loggedIn.rootUserId);
-    formData.append("jApplicantKeywords", filterCatagory);
+    const jApplicantsId = loggedIn.rootUserId;
+    const jApplicantKeywords = filterCatagory;
+    const jUserCvName = cvName;
+
+    setcvName("");
 
     fetch("/appliforjob", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        jApplicantsId,
+        jApplicantKeywords,
+        jobId,
+        jUserCvName,
+      }),
     }).then((res) => {
       if (res.status === 422) {
         return alert("server errror!");
@@ -132,7 +139,7 @@ export default function JobApply({ setisApply, jobId }) {
           </div>
         </div>
 
-        <label className="primaryButton">
+        {/* <label className="primaryButton">
           Upload CV
           <input
             name="jImage"
@@ -144,7 +151,16 @@ export default function JobApply({ setisApply, jobId }) {
             }}
           />
         </label>
-        {cvName !== "" && <p className="cvName">{cvName}</p>}
+        {cvName !== "" && <p className="cvName">{cvName}</p>} */}
+
+        <input
+          type="text"
+          className="jobApplyInpu"
+          placeholder="Upload CV link"
+          value={cvName}
+          onChange={(e) => setcvName(e.target.value)}
+        />
+
         <div className="applySaveCancelBtn">
           <button className="primaryButton" onClick={jobApplyControler}>
             Apply

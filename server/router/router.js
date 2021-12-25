@@ -109,11 +109,7 @@ const userCvUpload = multer({
   storage: userCvStorage,
 });
 
-router.post(
-  "/profileupdate/cv",
-  userCvUpload.single("uCv"),
-  updateUserCvFunction
-);
+router.post("/profileupdate/cv", updateUserCvFunction);
 
 // update user profile picture
 const profileImageUpload = multer({

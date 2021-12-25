@@ -212,15 +212,13 @@ module.exports = {
 
   async updateUserCvFunction(req, res) {
     try {
-      const { _id } = req.body;
-      const uCv = req.file.filename;
+      const { _id, uCv } = req.body;
+      // const previousCv = await User.findOne({ _id }, { uCv: 1 });
 
-      const previousCv = await User.findOne({ _id }, { uCv: 1 });
-
-      if (previousCv.uCv) {
-        const cvPath = `../client//public//files//usercv//${previousCv.uCv}`;
-        fs.unlinkSync(cvPath);
-      }
+      // if (previousCv.uCv) {
+      //   const cvPath = `../client//public//files//usercv//${previousCv.uCv}`;
+      //   fs.unlinkSync(cvPath);
+      // }
 
       const updateUserCv = await User.updateOne(
         { _id },

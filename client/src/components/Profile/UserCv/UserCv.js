@@ -1,13 +1,10 @@
 import React, { useContext, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import UserContext from "../../../context/UserContext";
-import ViewPDF from "../../ViewPDF/ViewPDF";
 import "./UserCv.css";
 
 export default function UserCv({ userId }) {
   const [isUpdateCv, setisUpdateCv] = useState(false);
-  const [showMyCv, setshowMyCv] = useState(false);
-  const [uCv, setuCv] = useState();
   const [cvName, setcvName] = useState("");
   const { loggedIn } = useContext(AuthContext);
   const { userInfo, getUserDetails } = useContext(UserContext);
@@ -16,13 +13,18 @@ export default function UserCv({ userId }) {
     e.preventDefault();
     if (cvName === "") return alert("Upload your cv!");
 
-    const formData = new FormData();
-    formData.append("uCv", uCv);
-    formData.append("_id", loggedIn.rootUserId);
+    const _id = loggedIn.rootUserId;
+    const uCv = cvName;
 
     fetch("/profileupdate/cv", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id,
+        uCv,
+      }),
     }).then((res) => {
       if (res.status === 422) {
         return alert("server errror!");
@@ -48,7 +50,8 @@ export default function UserCv({ userId }) {
             className="primaryButton"
             onClick={() => {
               if (!userInfo.uCv) return alert("Didn't have CV!");
-              setshowMyCv(true);
+              const win = window.open(userInfo.uCv, "_blank");
+              // win.focus();
             }}
           >
             CV
@@ -64,19 +67,13 @@ export default function UserCv({ userId }) {
         </div>
       ) : (
         <div className="userUpdateCvBody">
-          <label className="primaryButton">
-            Upload CV
-            <input
-              name="jImage"
-              type="file"
-              accept=".pdf"
-              onChange={(e) => {
-                setuCv(e.target.files[0]);
-                setcvName(e.target.files[0].name);
-              }}
-            />
-          </label>
-          {cvName !== "" && <p>{cvName}</p>}
+          <input
+            type="text"
+            placeholder="Upload CV link"
+            value={cvName}
+            onChange={(e) => setcvName(e.target.value)}
+          />
+
           <div className="cvupSaveCancelBtn">
             <button className="primaryButton" onClick={cvUpdateController}>
               Update
@@ -90,13 +87,6 @@ export default function UserCv({ userId }) {
             </button>
           </div>
         </div>
-      )}
-
-      {showMyCv && (
-        <ViewPDF
-          cvUrl={`/files/usercv/${userInfo.uCv}`}
-          exitViewPdf={setshowMyCv}
-        />
       )}
     </div>
   );
