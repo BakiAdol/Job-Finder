@@ -67,7 +67,8 @@ const userCvStorage = multer.diskStorage({
 
 const profileImageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client//public//images//profilepic");
+    // cb(null, "../client//public//images//profilepic");
+    cb(null, "./tmp/pro");
   },
   filename: function (req, file, cb) {
     cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
@@ -119,11 +120,7 @@ const profileImageUpload = multer({
   storage: profileImageStorage,
   fileFilter: imageFilter,
 });
-router.post(
-  "/profileupdate/profilepic",
-  profileImageUpload.single("uPropic"),
-  updateUserProfilePicFunction
-);
+router.post("/profileupdate/profilepic", updateUserProfilePicFunction);
 
 // upload cv
 

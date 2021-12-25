@@ -43,7 +43,7 @@ export default function Profile(props) {
             ""
           )}
 
-          <img src={`/images/profilepic/${userInfo.uPropic}`} alt="" />
+          <img src={`${userInfo.uPropic}`} alt="" />
           {loggedIn.rootUserId === uId ? (
             <button
               className="primaryButton"

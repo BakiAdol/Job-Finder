@@ -188,13 +188,13 @@ module.exports = {
 
   async updateUserProfilePicFunction(req, res) {
     try {
-      const { _id } = req.body;
-      const uPropic = req.file.filename;
-      const previousPro = await User.findOne({ _id }, { uPropic: 1 });
-      if (previousPro.uPropic !== "blnkpropic.gif") {
-        const imagePath = `../client//public//images//profilepic//${previousPro.uPropic}`;
-        fs.unlinkSync(imagePath);
-      }
+      const { _id, uPropic } = req.body;
+      // const uPropic = req.file.filename;
+      // const previousPro = await User.findOne({ _id }, { uPropic: 1 });
+      // if (previousPro.uPropic !== "blnkpropic.gif") {
+      //   const imagePath = `../client//public//images//profilepic//${previousPro.uPropic}`;
+      //   fs.unlinkSync(imagePath);
+      // }
 
       const updatePro = await User.updateOne(
         { _id },
