@@ -9,7 +9,11 @@ export default function JobCard(props) {
   const { loggedIn } = useContext(AuthContext);
   function DMYconvert(strDate) {
     return (
-      strDate.getDate() + "-" + strDate.getMonth() + "-" + strDate.getFullYear()
+      strDate.getDate() +
+      "-" +
+      (parseInt(strDate.getMonth()) + 1) +
+      "-" +
+      strDate.getFullYear()
     );
   }
   const postDate = DMYconvert(new Date(props.jPostDate));
@@ -74,11 +78,7 @@ export default function JobCard(props) {
 
       <h2 className="titleShow">{props.jTitle}</h2>
       <p className="desShow">{props.jDescription}</p>
-      {props.jImage ? (
-        <img src={`/images/jobimages/${props.jImage}`} alt="" />
-      ) : (
-        ""
-      )}
+      {props.jImage ? <img src={`${props.jImage}`} alt="" /> : ""}
       <div className="jobCata">
         {props.jCatagory.map((items, pos) => {
           return (

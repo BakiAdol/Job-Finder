@@ -49,31 +49,88 @@ export default function JobPost() {
       return alert("Add at lest one catagory!");
 
     const formData = new FormData();
-    formData.append("jUserId", loggedIn.rootUserId);
-    formData.append("jDeadline", jobInp.jDeadline);
-    formData.append("jTitle", jobInp.jTitle);
-    formData.append("jDescription", jobInp.jDescription);
-    formData.append("jImage", jobInp.jImage);
-    formData.append("jCatagory", [...jobInp.jCatagory]);
+    const jImg = jobInp.jImage;
+    let imurl = "";
+    const jUserId = loggedIn.rootUserId;
+    const jDeadline = jobInp.jDeadline;
+    const jTitle = jobInp.jTitle;
+    const jDescription = jobInp.jDescription;
+    const jCatagory = [...jobInp.jCatagory];
 
-    fetch("/postnewjob", {
-      method: "POST",
-      body: formData,
-    }).then((res) => {
-      if (res.status === 422) {
-        return alert("server errror!");
-      }
-      alert("Job Post Successfull!");
-      setjobInp({
-        jUserId: "",
-        jDeadline: new Date(),
-        jTitle: "",
-        jDescription: "",
-        jImage: "",
-        jCatagory: [],
+    if (jImg) {
+      console.log("aiche");
+      formData.append("file", jImg);
+      formData.append("upload_preset", "jobfinderimage");
+      formData.append("cloud_name", "datfgzevr");
+
+      fetch("https://api.cloudinary.com/v1_1/datfgzevr/image/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const jImage = data.url;
+          fetch("/postnewjob", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              jUserId,
+              jDeadline,
+              jTitle,
+              jDescription,
+              jImage,
+              jCatagory,
+            }),
+          }).then((res) => {
+            if (res.status === 422) {
+              return alert("server errror!");
+            }
+            alert("Job Post Successfull!");
+            setjobInp({
+              jUserId: "",
+              jDeadline: new Date(),
+              jTitle: "",
+              jDescription: "",
+              jImage: "",
+              jCatagory: [],
+            });
+            setjobImage(undefined);
+          });
+        })
+        .catch((err) => {
+          return alert("Server error!");
+        });
+    } else {
+      fetch("/postnewjob", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          jUserId,
+          jDeadline,
+          jTitle,
+          jDescription,
+          jCatagory,
+        }),
+      }).then((res) => {
+        if (res.status === 422) {
+          return alert("server errror!");
+        }
+        alert("Job Post Successfull!");
+        setjobInp({
+          jUserId: "",
+          jDeadline: new Date(),
+          jTitle: "",
+          jDescription: "",
+          jImage: "",
+          jCatagory: [],
+        });
+        setjobImage(undefined);
       });
-      setjobImage(undefined);
-    });
+    }
   };
 
   return (

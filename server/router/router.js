@@ -188,7 +188,7 @@ const jobImageUpload = multer({
   fileFilter: imageFilter,
 });
 // new job post
-router.post("/postnewjob", jobImageUpload.single("jImage"), PostNewJobFunction);
+router.post("/postnewjob", PostNewJobFunction);
 // get all jobs
 router.post("/alljobs", ShowAllJobsFunction);
 // get my all jobs

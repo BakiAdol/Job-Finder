@@ -6,13 +6,11 @@ require("../db/dbconn");
 
 module.exports = {
   async PostNewJobFunction(req, res) {
-    let { jUserId, jDeadline, jTitle, jDescription, jCatagory } = req.body;
-    jCatagory = jCatagory.split(",");
+    let { jUserId, jDeadline, jTitle, jDescription, jCatagory, jImage } =
+      req.body;
+    // jCatagory = jCatagory.split(",");
 
     const jPostDate = new Date();
-    let jImage;
-    if (!req.file) jImage = "";
-    else jImage = req.file.filename;
 
     if (!jUserId || !jTitle || !jDescription || !jCatagory) {
       return res.status(422).json({ error: "Fill all fields!" });

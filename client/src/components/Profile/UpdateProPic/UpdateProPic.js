@@ -25,7 +25,6 @@ export default function UpdateProPic({ rootUserId, setupdatePropic }) {
       .then((res) => res.json())
       .then((data) => {
         const imurl = data.url;
-        console.log(_id, imurl);
 
         fetch("/profileupdate/profilepic", {
           method: "POST",
