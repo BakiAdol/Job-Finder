@@ -52,7 +52,7 @@ export default function SearchUser() {
         {searchUser.map((item, pos) => {
           return (
             <div key={pos} className="searchUser">
-              <img src={`/images/profilepic/${item.uPropic}`} alt="" />
+              <img src={`${item.uPropic}`} alt="" />
               <Link to={`/profile/${item._id}`} className="searchUserName">
                 {item.uName}
               </Link>
